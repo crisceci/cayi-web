@@ -73,22 +73,30 @@ El diseño usa **blanco + ink + naranja** como base (como el header negro y los 
 
 `Bricolage Grotesque` (titulares, con carácter editorial) + `Manrope` (texto de cuerpo), cargadas gratis desde Google Fonts. Si quieres probar otra combinación, cámbiala en la línea `<link href="https://fonts.googleapis.com/css2?family=...">` de `index.html` y en `--font-display`/`--font-body` de `css/style.css`.
 
+### El formulario de contacto (funciona en cualquier hosting)
+
+El `<form>` de la sección "Contáctanos" usa **[FormSubmit](https://formsubmit.co)** — gratis, sin necesidad de crear cuenta ni backend, y funciona igual en Vercel, Netlify o GitHub Pages. Antes de publicar:
+
+1. Abre `index.html`, busca `action="https://formsubmit.co/hola@cayistudio.pe"` (dentro de la sección Contacto) y cambia `hola@cayistudio.pe` por tu email real.
+2. La primera vez que alguien envíe el formulario en producción, FormSubmit te manda un correo de confirmación — ábrelo y confirma para activar el buzón (mensajes antes de confirmar no llegan).
+3. Opcional: agrega `<input type="hidden" name="_next" value="https://tusitio.vercel.app/gracias.html">` si quieres redirigir a una página propia después de enviar; si no, FormSubmit muestra su propia pantalla genérica de "mensaje enviado".
+
 ## Cómo publicarlo gratis
 
-### Opción recomendada: Netlify (el formulario de contacto funciona solo)
-
-1. Entra a [netlify.com](https://netlify.com) y crea una cuenta gratis (puedes usar tu cuenta de GitHub).
-2. Sube esta carpeta a un repositorio de GitHub (o arrastra la carpeta directamente en "Deploys" de Netlify — no necesitas GitHub si no quieres).
-3. Netlify detecta que es un sitio estático solo: no necesitas configurar ningún build.
-4. En un par de minutos te da un link (algo como `cayi-studio.netlify.app`). Puedes conectar tu propio dominio gratis desde ahí si ya tienes uno.
-5. El formulario de contacto (sección "Contáctanos") funciona automáticamente en Netlify gracias al atributo `data-netlify="true"` que ya tiene el `<form>` — no necesitas backend ni JavaScript adicional. Los mensajes llegan a "Forms" dentro de tu panel de Netlify, y puedes conectar notificaciones por email gratis desde ahí (Site settings → Forms → Notifications).
-
-### Opción alternativa: GitHub Pages
+### Opción recomendada: Vercel (igual que Cayi Studio)
 
 1. Sube esta carpeta a un repositorio de GitHub (por ejemplo `cayi-web`, igual que hiciste con `cayi-studio`).
-2. Ve a **Settings → Pages** del repositorio, elige la rama `main` y guarda.
-3. En unos minutos tu sitio queda publicado en `https://tuusuario.github.io/cayi-web/`.
-4. **Importante:** GitHub Pages no procesa formularios (es 100% estático). Si usas esta opción, reemplaza el `<form>` de contacto por uno de [Formspree](https://formspree.io) (plan gratis, sin tarjeta): crea una cuenta, te dan una URL tipo `https://formspree.io/f/xxxxxx`, y la pegas en el atributo `action` del `<form>` en `index.html` (cambia también `method="POST"` y quita los atributos `data-netlify`/`netlify-honeypot`). El panel de administrador (`admin.html`) funciona igual en cualquiera de las dos opciones, porque guarda en Supabase, no en Netlify/GitHub Pages.
+2. Entra a [vercel.com](https://vercel.com) e inicia sesión con tu cuenta de GitHub.
+3. **Add New... → Project**, elige el repositorio `cayi-web`. No necesitas cambiar ninguna configuración de build — es un sitio estático, Vercel lo detecta solo. Dale **Deploy**.
+4. En un par de minutos te da un link (algo como `cayi-web.vercel.app`). Cada vez que subas un cambio a la rama principal de GitHub, Vercel lo publica automáticamente. Puedes conectar tu propio dominio gratis desde Project Settings → Domains.
+5. `admin.html` queda disponible en `tusitio.vercel.app/admin.html`.
+
+### Alternativas
+
+- **Netlify**: mismos pasos que Vercel pero en [netlify.com](https://netlify.com) — también gratis, también detecta el sitio estático solo.
+- **GitHub Pages**: en el repositorio, ve a **Settings → Pages**, elige la rama `main` y guarda. Tu sitio queda en `https://tuusuario.github.io/cayi-web/`.
+
+El panel de administrador y el formulario de contacto funcionan igual en cualquiera de las tres, porque guardan en Supabase y FormSubmit respectivamente — ninguno depende de Vercel/Netlify.
 
 ## Estructura del proyecto
 
