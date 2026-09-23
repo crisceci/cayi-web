@@ -40,30 +40,57 @@ function playHeroEntrance() {
 
 // ---------- Sonido de bienvenida (sintetizado, sin archivos de audio) ----------
 // Un pequeño acorde ascendente (do-mi-sol) generado con Web Audio API.
-// Los navegadores bloquean el audio automático sin interacción previa del usuario:
-// si eso pasa, el intento simplemente no suena, pero la animación visual sigue igual.
+//
+// IMPORTANTE: los navegadores (Chrome, Safari, Firefox) bloquean TODO audio
+// automático hasta que la persona interactúa con la página al menos una vez
+// (clic, toque o tecla) — es una política universal, no algo propio de este
+// sitio ni algo que se pueda saltar con código. Por eso: si el navegador ya
+// permite audio en este origen, el acorde suena de inmediato junto al splash;
+// si no, queda "armado" y suena automáticamente en el instante exacto de la
+// primera interacción real de la persona con la página (sin que tenga que
+// hacer nada especial — cualquier clic, toque o tecla lo dispara).
 function playChime() {
   try {
     var Ctx = window.AudioContext || window.webkitAudioContext;
     if (!Ctx) return;
     var ctx = new Ctx();
-    var now = ctx.currentTime;
-    var notes = [523.25, 659.25, 783.99]; // C5, E5, G5
-    notes.forEach(function (freq, i) {
-      var osc = ctx.createOscillator();
-      var gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.value = freq;
-      var start = now + i * 0.09;
-      gain.gain.setValueAtTime(0, start);
-      gain.gain.linearRampToValueAtTime(0.4, start + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.75);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(start);
-      osc.stop(start + 0.8);
-    });
-  } catch (e) { /* audio automático bloqueado o no soportado — silencioso */ }
+
+    function scheduleNotes() {
+      var now = ctx.currentTime;
+      var notes = [523.25, 659.25, 783.99]; // C5, E5, G5
+      notes.forEach(function (freq, i) {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        var start = now + i * 0.09;
+        gain.gain.setValueAtTime(0, start);
+        gain.gain.linearRampToValueAtTime(0.4, start + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.75);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + 0.8);
+      });
+    }
+
+    if (ctx.state === 'running') {
+      scheduleNotes();
+    } else {
+      var onFirstInteraction = function () {
+        ctx.resume().then(scheduleNotes).catch(function () {});
+        cleanup();
+      };
+      var cleanup = function () {
+        ['pointerdown', 'keydown', 'touchstart'].forEach(function (evt) {
+          document.removeEventListener(evt, onFirstInteraction);
+        });
+      };
+      ['pointerdown', 'keydown', 'touchstart'].forEach(function (evt) {
+        document.addEventListener(evt, onFirstInteraction, { once: true, passive: true });
+      });
+    }
+  } catch (e) { /* Web Audio no soportado — silencioso */ }
 }
 
 // ---------- Splash de bienvenida ("Cayi Studio") ----------
