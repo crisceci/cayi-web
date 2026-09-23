@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Contenido para Redes">
+  <rect width="800" height="600" fill="#121212"/>
+  <g stroke="#EF8B3C" stroke-width="2.5" fill="none">
+    <path d="M60 100 V60 H100"/>
+    <path d="M740 100 V60 H700"/>
+    <path d="M60 500 V540 H100"/>
+    <path d="M740 500 V540 H700"/>
+  </g>
+  <g transform="translate(400,270)" stroke="#EF8B3C" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="-56" y="-30" width="112" height="76" rx="10"/>
+    <path d="M-26 -30 L-14 -46 H14 L26 -30"/>
+    <circle cx="0" cy="10" r="26"/>
+  </g>
+  <text x="400" y="410" font-family="Arial, sans-serif" font-size="15" letter-spacing="2" fill="#EF8B3C" text-anchor="middle">PLACEHOLDER</text>
+  <text x="400" y="440" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#F6EBDD" text-anchor="middle">Contenido para Redes</text>
+  <text x="400" y="466" font-family="Arial, sans-serif" font-size="13" fill="#8C7863" text-anchor="middle">Reemplaza esta imagen por una foto real</text>
+</svg>

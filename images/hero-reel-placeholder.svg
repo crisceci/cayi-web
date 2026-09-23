@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600" role="img" aria-label="Reel de Cayi Studio">
+  <rect width="480" height="600" fill="#121212"/>
+  <g stroke="#EF8B3C" stroke-width="2" fill="none" opacity="0.6">
+    <path d="M32 64 V32 H64"/>
+    <path d="M448 64 V32 H416"/>
+    <path d="M32 536 V568 H64"/>
+    <path d="M448 536 V568 H416"/>
+  </g>
+  <circle cx="240" cy="280" r="52" fill="none" stroke="#EF8B3C" stroke-width="2.5"/>
+  <path d="M226 258 L266 280 L226 302 Z" fill="#EF8B3C"/>
+  <text x="240" y="380" font-family="Arial, sans-serif" font-size="14" letter-spacing="2.5" fill="#EF8B3C" text-anchor="middle">TU REEL AQUÍ</text>
+  <text x="240" y="408" font-family="Arial, sans-serif" font-size="15" fill="#C7B29E" text-anchor="middle">Súbelo desde el panel de</text>
+  <text x="240" y="428" font-family="Arial, sans-serif" font-size="15" fill="#C7B29E" text-anchor="middle">administrador (admin.html)</text>
+</svg>
