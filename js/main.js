@@ -25,17 +25,87 @@ if (window.AOS) {
   AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
 }
 
-// ---------- Entrada del héroe (GSAP) ----------
-if (window.gsap) {
+// ---------- Entrada del héroe (GSAP) — se dispara después del splash ----------
+function playHeroEntrance() {
+  if (!window.gsap) return;
   gsap.set(['#heroEyebrow', '#heroTitle', '#heroP1', '#heroP2', '#heroActions'], { opacity: 0, y: 22 });
   gsap.set('.hero-media', { opacity: 0, scale: 0.96 });
-  gsap.to('#heroEyebrow', { opacity: 1, y: 0, duration: 0.6, delay: 0.1, ease: 'power2.out' });
-  gsap.to('#heroTitle',   { opacity: 1, y: 0, duration: 0.7, delay: 0.22, ease: 'power2.out' });
-  gsap.to('#heroP1',      { opacity: 1, y: 0, duration: 0.7, delay: 0.36, ease: 'power2.out' });
-  gsap.to('#heroP2',      { opacity: 1, y: 0, duration: 0.7, delay: 0.46, ease: 'power2.out' });
-  gsap.to('#heroActions', { opacity: 1, y: 0, duration: 0.7, delay: 0.56, ease: 'power2.out' });
-  gsap.to('.hero-media',  { opacity: 1, scale: 1, duration: 0.8, delay: 0.2, ease: 'power2.out' });
+  gsap.to('#heroEyebrow', { opacity: 1, y: 0, duration: 0.6, delay: 0.05, ease: 'power2.out' });
+  gsap.to('#heroTitle',   { opacity: 1, y: 0, duration: 0.7, delay: 0.16, ease: 'power2.out' });
+  gsap.to('#heroP1',      { opacity: 1, y: 0, duration: 0.7, delay: 0.28, ease: 'power2.out' });
+  gsap.to('#heroP2',      { opacity: 1, y: 0, duration: 0.7, delay: 0.38, ease: 'power2.out' });
+  gsap.to('#heroActions', { opacity: 1, y: 0, duration: 0.7, delay: 0.48, ease: 'power2.out' });
+  gsap.to('.hero-media',  { opacity: 1, scale: 1, duration: 0.8, delay: 0.14, ease: 'power2.out' });
 }
+
+// ---------- Sonido de bienvenida (sintetizado, sin archivos de audio) ----------
+// Un pequeño acorde ascendente (do-mi-sol) generado con Web Audio API.
+// Los navegadores bloquean el audio automático sin interacción previa del usuario:
+// si eso pasa, el intento simplemente no suena, pero la animación visual sigue igual.
+function playChime() {
+  try {
+    var Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return;
+    var ctx = new Ctx();
+    var now = ctx.currentTime;
+    var notes = [523.25, 659.25, 783.99]; // C5, E5, G5
+    notes.forEach(function (freq, i) {
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      var start = now + i * 0.09;
+      gain.gain.setValueAtTime(0, start);
+      gain.gain.linearRampToValueAtTime(0.16, start + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.6);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(start);
+      osc.stop(start + 0.65);
+    });
+  } catch (e) { /* audio automático bloqueado o no soportado — silencioso */ }
+}
+
+// ---------- Splash de bienvenida ("Cayi Studio") ----------
+(function splash() {
+  var el = document.getElementById('splash');
+  if (!el) { playHeroEntrance(); return; }
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function finish() {
+    document.body.classList.remove('splash-active');
+    el.classList.add('splash-hidden');
+    playHeroEntrance();
+  }
+
+  // Red de seguridad: si algo falla (GSAP no cargó, etc.) el splash nunca se queda pegado.
+  var safety = setTimeout(finish, 4000);
+
+  if (reduceMotion || !window.gsap) {
+    clearTimeout(safety);
+    finish();
+    return;
+  }
+
+  document.body.classList.add('splash-active');
+  playChime();
+
+  var letters = el.querySelectorAll('.splash-letter');
+  gsap.set(letters, {
+    opacity: 0,
+    x: function (i, target) { return target.getAttribute('data-dir') === 'left' ? -70 : 70; }
+  });
+  gsap.set('#splashSub', { opacity: 0, y: 10 });
+
+  var tl = gsap.timeline({
+    onComplete: function () { clearTimeout(safety); finish(); }
+  });
+  tl.to(letters, { opacity: 1, x: 0, duration: 0.55, ease: 'back.out(1.7)', stagger: 0.08 })
+    .to('#splashSub', { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.15')
+    .to({}, { duration: 0.45 })
+    .to(el, { opacity: 0, duration: 0.5, ease: 'power1.inOut' });
+})();
 
 // ---------- Contenido dinámico (Panel de administrador vía Supabase) ----------
 // Si no configuraste supabase-config.js todavía, esta sección simplemente no

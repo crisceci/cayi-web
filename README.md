@@ -9,9 +9,22 @@ Está inspirado en la estructura de [maiafilms.pe](https://maiafilms.pe/) (produ
 El sitio usa dos librerías gratuitas por CDN (no requieren instalación local, ya están enlazadas en `index.html`):
 
 - **[AOS](https://michalsnik.github.io/aos/)** (Animate On Scroll) — las secciones aparecen con fade al hacer scroll (`data-aos="fade-up"`, etc. en el HTML).
-- **[GSAP](https://gsap.com/)** — anima la entrada del texto del héroe (aparece en cascada) y el video destacado (fade + zoom suave) en `js/main.js`.
+- **[GSAP](https://gsap.com/)** — anima la entrada del texto del héroe (aparece en cascada), el video destacado (fade + zoom suave), y la pantalla de bienvenida en `js/main.js`.
 
 Si quieres más movimiento (parallax, transiciones entre secciones, texto que se divide en letras), GSAP ya está cargado — solo hay que agregar más animaciones en `js/main.js`; no hace falta instalar nada nuevo.
+
+### Pantalla de bienvenida ("Cayi Studio")
+
+Cada vez que alguien carga o recarga la web, aparece primero una pantalla negra de pantalla completa con "Cayi Studio" armándose letra por letra desde los costados, más un pequeño acorde ascendente (do-mi-sol) — y recién después se revela la página. Todo vive en:
+
+- HTML: bloque `#splash` al inicio de `index.html`.
+- CSS: sección "splash de bienvenida" en `css/style.css`.
+- JS: función `splash()` en `js/main.js` (usa GSAP para animar las letras y Web Audio API para generar el sonido — no hay ningún archivo de audio de por medio, el sonido se sintetiza en el navegador).
+
+Detalles a tener en cuenta:
+- **El sonido puede no sonar la primera vez**: los navegadores bloquean el audio automático hasta que la persona interactúa con la página (política estándar de Chrome/Safari/Firefox, no es un bug). La animación visual siempre se ve igual, con o sin sonido.
+- Respeta la preferencia de "reducir movimiento" del sistema operativo — si alguien la tiene activada, el splash se salta la animación y muestra la web directo.
+- Si quieres cambiar el texto, el color de "yi", la duración, o quitar el sonido, todo está comentado en los tres archivos de arriba.
 
 ## Panel de administrador (`admin.html`)
 

@@ -58,6 +58,26 @@ button{font-family:inherit; cursor:pointer;}
 }
 .skip-link:focus{left:0;}
 
+/* ---------- splash de bienvenida ---------- */
+#splash{
+  position:fixed; inset:0; z-index:9999; background:var(--ink);
+  display:flex; align-items:center; justify-content:center;
+}
+#splash.splash-hidden{ display:none; }
+body.splash-active{ overflow:hidden; }
+.splash-inner{ text-align:center; }
+.splash-word{
+  display:flex; justify-content:center; gap:.03em;
+  font-family:var(--font-display); font-weight:800;
+  font-size:clamp(42px, 9vw, 84px); color:#FAFAFA; line-height:1;
+}
+.splash-letter{ display:inline-block; opacity:0; will-change:transform, opacity; }
+.splash-letter.accent{ color:var(--orange); font-style:italic; }
+.splash-sub{
+  margin-top:14px; font-weight:700; font-size:clamp(11px, 1.6vw, 14px);
+  letter-spacing:.4em; text-transform:uppercase; color:#ABABAB; opacity:0;
+}
+
 /* ---------- header ---------- */
 .site-header{
   position:sticky; top:0; z-index:900;
