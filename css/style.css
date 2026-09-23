@@ -67,12 +67,20 @@ button{font-family:inherit; cursor:pointer;}
 body.splash-active{ overflow:hidden; }
 .splash-inner{ text-align:center; }
 .splash-word{
+  position:relative; overflow:hidden;
   display:flex; justify-content:center; gap:.03em;
   font-family:var(--font-display); font-weight:800;
   font-size:clamp(42px, 9vw, 84px); color:#FAFAFA; line-height:1;
+  padding:0 .05em;
 }
 .splash-letter{ display:inline-block; opacity:0; will-change:transform, opacity; }
 .splash-letter.accent{ color:var(--orange); font-style:italic; }
+.splash-shine{
+  position:absolute; top:-20%; left:-35%; width:22%; height:140%;
+  background:linear-gradient(115deg, transparent 0%, rgba(255,255,255,.05) 35%, rgba(255,255,255,.9) 50%, rgba(255,255,255,.05) 65%, transparent 100%);
+  transform:skewX(-18deg);
+  pointer-events:none; mix-blend-mode:overlay;
+}
 .splash-sub{
   margin-top:14px; font-weight:700; font-size:clamp(11px, 1.6vw, 14px);
   letter-spacing:.4em; text-transform:uppercase; color:#ABABAB; opacity:0;

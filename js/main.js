@@ -56,12 +56,12 @@ function playChime() {
       osc.frequency.value = freq;
       var start = now + i * 0.09;
       gain.gain.setValueAtTime(0, start);
-      gain.gain.linearRampToValueAtTime(0.16, start + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.6);
+      gain.gain.linearRampToValueAtTime(0.4, start + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.75);
       osc.connect(gain);
       gain.connect(ctx.destination);
       osc.start(start);
-      osc.stop(start + 0.65);
+      osc.stop(start + 0.8);
     });
   } catch (e) { /* audio automático bloqueado o no soportado — silencioso */ }
 }
@@ -97,13 +97,15 @@ function playChime() {
     x: function (i, target) { return target.getAttribute('data-dir') === 'left' ? -70 : 70; }
   });
   gsap.set('#splashSub', { opacity: 0, y: 10 });
+  gsap.set('#splashShine', { left: '-35%' });
 
   var tl = gsap.timeline({
     onComplete: function () { clearTimeout(safety); finish(); }
   });
   tl.to(letters, { opacity: 1, x: 0, duration: 0.55, ease: 'back.out(1.7)', stagger: 0.08 })
     .to('#splashSub', { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.15')
-    .to({}, { duration: 0.45 })
+    .to('#splashShine', { left: '135%', duration: 0.7, ease: 'power2.inOut' }, '-=0.1')
+    .to({}, { duration: 0.3 })
     .to(el, { opacity: 0, duration: 0.5, ease: 'power1.inOut' });
 })();
 
