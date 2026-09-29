@@ -2,7 +2,7 @@
 
 Sitio web público de Cayi Studio (fotografía y video para eventos corporativos, estudio, publicidad y contenido de marca). Es un sitio estático — no necesita build ni instalar nada — con un **panel de administrador** para editar todo el contenido (textos, colores, imágenes, videos) sin tocar código.
 
-Está inspirado en la estructura de [maiafilms.pe](https://maiafilms.pe/) (productora audiovisual), pero con identidad propia de **Cayi Studio**: paleta ink/naranja, tipografía editorial Instrument Serif + Instrument Sans, iconos de línea dibujados a mano y animaciones reales (no plantilla genérica).
+Está inspirado en la estructura de [maiafilms.pe](https://maiafilms.pe/) (productora audiovisual), pero con identidad propia de **Cayi Studio**: paleta ink/naranja, tipografía Lexend, iconos de línea dibujados a mano y animaciones reales (no plantilla genérica).
 
 ### Pasada de rediseño (auditoría anti-genérico)
 
@@ -100,7 +100,7 @@ El diseño usa **blanco + ink + naranja** como base (como el header negro y los 
 
 ### Tipografía
 
-`Instrument Serif` (titulares y logo — serif editorial, poco común en plantillas de IA, por eso se ve menos genérico) + `Instrument Sans` (texto de cuerpo, botones, menú), cargadas gratis desde Google Fonts. Instrument Serif solo trae el peso Regular (400) + cursiva — por diseño, los títulos ya no usan negrita, el tamaño grande les da la presencia. Si quieres probar otra combinación, cámbiala en la línea `<link href="https://fonts.googleapis.com/css2?family=...">` de `index.html`, `admin.html` y `politica-de-privacidad.html`, y en `--font-display`/`--font-body` de `css/style.css` (y en `admin.html`, que tiene sus propias variables).
+`Lexend` en todo el sitio (titulares en negrita/extra-negrita, texto de cuerpo en regular/medio) — una sola familia tipográfica, cargada gratis desde Google Fonts. Se eligió por ser moderna, muy legible (está diseñada específicamente para maximizar la fluidez de lectura) y menos común en plantillas genéricas que Inter/Roboto/Manrope. No tiene cursiva real, así que el acento "yi" del logo se distingue solo por color, no por itálica. Si quieres probar otra tipografía, cámbiala en la línea `<link href="https://fonts.googleapis.com/css2?family=...">` de `index.html`, `admin.html` y `politica-de-privacidad.html`, y en `--font-display`/`--font-body` de `css/style.css` (y en `admin.html`, que tiene sus propias variables).
 
 ### Fotos de referencia
 
