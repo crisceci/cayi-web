@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de Privacidad — Cayi Studio</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .legal{ max-width:720px; margin:0 auto; padding:80px 24px 100px; }
+  .legal h1{ font-size:clamp(28px,4vw,40px); margin-bottom:8px; }
+  .legal .updated{ color:var(--ink-faint); font-size:14px; margin-bottom:40px; }
+  .legal h2{ font-size:20px; margin:36px 0 12px; }
+  .legal p, .legal li{ color:var(--ink-soft); line-height:1.7; margin-bottom:14px; }
+  .legal ul{ padding-left:20px; list-style:disc; }
+  .legal a{ text-decoration:underline; color:var(--ink); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand" aria-label="Cayi Studio — Inicio">
+      <span class="ca">Ca</span><span class="yi">yi</span> <span class="brand-sub">Studio</span>
+    </a>
+  </div>
+</header>
+
+<main class="legal">
+  <!-- TODO: este es un texto de partida genérico, no asesoría legal. Antes de publicar,
+       revísalo (o pídele a un abogado que lo revise) y ajústalo a lo que realmente
+       hace Cayi Studio con los datos de sus clientes. -->
+  <h1>Política de Privacidad</h1>
+  <p class="updated">Última actualización: [TODO: agrega la fecha]</p>
+
+  <p>Esta política explica qué datos recopila Cayi Studio a través de este sitio web y cómo los usa.</p>
+
+  <h2>Qué datos recopilamos</h2>
+  <p>Cuando completas el formulario de contacto, recopilamos el nombre, email y mensaje que nos envías. No recopilamos datos de pago ni información sensible a través de este sitio.</p>
+
+  <h2>Para qué los usamos</h2>
+  <ul>
+    <li>Responder a tu consulta o solicitud de cotización.</li>
+    <li>Coordinar detalles de un proyecto o evento contratado.</li>
+    <li>No usamos tus datos para enviarte publicidad sin tu consentimiento.</li>
+  </ul>
+
+  <h2>Con quién los compartimos</h2>
+  <p>Los mensajes del formulario se procesan a través de <a href="https://formsubmit.co" target="_blank" rel="noopener">FormSubmit</a> y llegan directo a nuestro email. No vendemos ni compartimos tus datos con terceros para fines comerciales.</p>
+
+  <h2>Cuánto tiempo los guardamos</h2>
+  <p>Conservamos los mensajes de contacto el tiempo necesario para atender tu solicitud y, si trabajamos juntos, mientras dure la relación comercial.</p>
+
+  <h2>Tus derechos</h2>
+  <p>Puedes pedirnos en cualquier momento que te digamos qué datos tuyos tenemos, que los corrijamos, o que los eliminemos, escribiéndonos a <a id="legalEmail" href="mailto:hola@cayistudio.pe">hola@cayistudio.pe</a>.</p>
+
+  <p><a href="index.html">← Volver al inicio</a></p>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-bottom">
+    <p>© <span id="year"></span> Cayi Studio. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  var y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

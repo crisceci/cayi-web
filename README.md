@@ -4,6 +4,22 @@ Sitio web público de Cayi Studio (fotografía y video para eventos corporativos
 
 Está inspirado en la estructura de [maiafilms.pe](https://maiafilms.pe/) (productora audiovisual), pero con identidad propia de **Cayi Studio**: paleta ink/naranja, tipografía Bricolage Grotesque + Manrope, iconos de línea dibujados a mano y animaciones reales (no plantilla genérica).
 
+### Pasada de rediseño (auditoría anti-genérico)
+
+Se auditó el diseño con la skill `redesign-skill` (más `soft-skill` e `impeccable` como referencia) para identificar patrones que se ven "hechos por IA". Cambios concretos que salieron de esa auditoría:
+
+- **Las 4 secciones de tarjetas seguidas (Servicios, Portafolio, Testimonios, Clientes) usaban la misma caja con borde+sombra** — el patrón más genérico de todos. Ahora Servicios y Testimonios ya no tienen caja (un filete superior y una comilla grande los diferencian); Portafolio y Clientes sí mantienen tarjeta porque enmarcan una imagen/logo.
+- **Textura de grano de película sutil** sobre toda la página (`.grain-overlay` en `css/style.css`) — rompe la planitud total, sin necesitar ninguna imagen.
+- **Un solo acento dominante**: las etiquetas pequeñas ("kicker") pasaron de rosa a naranja oscuro; el rosa fucsia queda solo en los 2 botones donde el cliente pidió variedad, en vez de repetirse en cada sección.
+- **Accesibilidad**: el foco del teclado en el formulario se había quedado sin indicador visible (`outline:none` sin reemplazo) — ahora tiene un anillo de foco visible en todo el sitio.
+- **Rendimiento de animación**: el brillo del splash animaba `left` (fuerza reflow); ahora anima `transform` (acelerado por GPU).
+- **Menú con sección activa resaltada** al hacer scroll (antes no había ninguna indicación de en qué sección estabas).
+- **Meta tags Open Graph/Twitter** para que el link se vea bien al compartirlo en WhatsApp/redes.
+- **Página de política de privacidad** creada y enlazada (el checkbox del formulario la mencionaba pero no existía).
+- Títulos con Title Case inconsistente pasados a minúscula natural en español; nombres de testimonios variados en vez de "Nombre Apellido" repetido 3 veces.
+
+Quedaron **27 skills de diseño instaladas globalmente** en `~/.claude/skills/` (de los repos `emilkowalski/skills`, `leonxlnx/taste-skill` y `pbakaus/impeccable`) para futuras rondas de pulido — cubren animación, tipografía, layout, y auditorías de "taste" en general.
+
 ### Animaciones instaladas
 
 El sitio usa dos librerías gratuitas por CDN (no requieren instalación local, ya están enlazadas en `index.html`):

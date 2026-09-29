@@ -10,7 +10,7 @@
   --bg:#FFFFFF; --surface:#FFFFFF; --surface-2:#F6F6F6;
   --border:#E5E5E5; --border-soft:#EFEFEF;
   --ink:#121212; --ink-soft:#6B6B6B; --ink-faint:#9A9A9A;
-  --shadow:0 1px 2px rgba(0,0,0,.05), 0 8px 24px -14px rgba(0,0,0,.18);
+  --shadow:0 1px 2px rgba(18,18,18,.06), 0 10px 28px -14px rgba(18,18,18,.16);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark){
@@ -43,10 +43,18 @@
 *{box-sizing:border-box; margin:0; padding:0;}
 html{scroll-behavior:smooth;}
 body{background:var(--bg); color:var(--ink); font-family:var(--font-body); -webkit-font-smoothing:antialiased; line-height:1.6;}
+
+/* Grano de película sutil, fijo sobre toda la página — rompe la planitud total
+   y encaja con la identidad de un estudio de foto/video. No requiere ninguna imagen. */
+.grain-overlay{
+  position:fixed; inset:0; z-index:1; pointer-events:none;
+  opacity:.035; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 img{max-width:100%; display:block;}
 a{color:inherit; text-decoration:none;}
 h1,h2,h3,.brand,.kicker,.btn{font-family:var(--font-display);}
-h1,h2,h3{font-weight:700; line-height:1.1; letter-spacing:-.01em;}
+h1,h2,h3{font-weight:700; line-height:1.1; letter-spacing:-.01em; text-wrap:balance;}
 ul{list-style:none;}
 button{font-family:inherit; cursor:pointer;}
 
@@ -100,8 +108,13 @@ body.splash-active{ overflow:hidden; }
 .brand-sub{font-family:var(--font-body); font-weight:600; font-size:12px; color:#8A8A8A; letter-spacing:.08em; text-transform:uppercase;}
 
 .main-nav{display:flex; align-items:center; gap:30px;}
-.main-nav a{font-weight:600; font-size:14.5px; color:#ABABAB; transition:color .15s;}
+.main-nav a{font-weight:600; font-size:14.5px; color:#ABABAB; transition:color .15s; position:relative;}
 .main-nav a:hover{color:var(--orange);}
+.main-nav a.active{color:#FAFAFA;}
+.main-nav a.active::after{
+  content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px; background:var(--orange);
+}
+.main-nav a.nav-cta.active::after{ display:none; }
 .nav-cta{
   background:var(--pink);
   color:#fff !important; padding:10px 22px; border-radius:999px; font-weight:700;
@@ -117,6 +130,7 @@ body.splash-active{ overflow:hidden; }
   border:none; transition:transform .2s cubic-bezier(.2,.8,.2,1), background .2s, color .2s;
 }
 .btn:hover{transform:translateY(-2px);}
+.btn:active{transform:translateY(0) scale(.97);}
 .btn-primary{background:var(--orange); color:var(--ink);}
 .btn-primary:hover{background:var(--ink); color:#fff;}
 .btn-secondary{background:var(--pink); color:#fff;}
@@ -160,7 +174,7 @@ body.splash-active{ overflow:hidden; }
 
 .kicker{
   display:block; font-weight:700; font-size:13px; letter-spacing:.1em; text-transform:uppercase;
-  color:var(--pink); margin-bottom:10px;
+  color:var(--orange-dark); margin-bottom:10px;
 }
 .section-head h2{font-size:clamp(28px, 3.2vw, 38px);}
 
@@ -185,7 +199,16 @@ body.splash-active{ overflow:hidden; }
 .portfolio-card p{font-size:13px; color:var(--ink-faint);}
 
 /* ---------- services ---------- */
-.service-card{padding:30px 26px;}
+/* Sin caja (sin borde/sombra) a propósito: si las 4 secciones seguidas usan la
+   misma tarjeta con borde+sombra, se ve repetitivo/genérico. Aquí solo un filete
+   superior marca cada servicio, y el link se ancla abajo para que las 4 columnas
+   queden alineadas sin importar el largo del texto. */
+.service-card{
+  background:transparent; border:none; box-shadow:none; border-radius:0;
+  border-top:2px solid var(--border);
+  padding:28px 4px 0; display:flex; flex-direction:column;
+}
+.service-card:hover{ transform:none; box-shadow:none; border-top-color:var(--orange); }
 .service-icon{
   width:56px; height:56px; border-radius:16px; background:var(--ink); color:var(--orange);
   display:flex; align-items:center; justify-content:center; margin-bottom:18px;
@@ -193,6 +216,7 @@ body.splash-active{ overflow:hidden; }
 .service-icon svg{width:26px; height:26px;}
 .service-card h3{font-size:18px; margin-bottom:10px; letter-spacing:-.005em;}
 .service-card p{font-size:14.5px; color:var(--ink-soft);}
+.service-card .link-arrow{ margin-top:auto; padding-top:16px; align-self:flex-start; }
 
 /* ---------- about ---------- */
 .about-inner{display:grid; grid-template-columns:1fr 1.1fr; gap:56px; align-items:center;}
@@ -202,8 +226,17 @@ body.splash-active{ overflow:hidden; }
 .about-copy .btn{margin-top:10px;}
 
 /* ---------- testimonials ---------- */
-.testimonial-card{padding:28px 26px;}
-.testimonial-card p{font-size:15px; color:var(--ink-soft); margin-bottom:20px; font-style:italic;}
+/* También sin caja — una comilla grande hace de marca visual en vez de border+shadow. */
+.testimonial-card{
+  background:transparent; border:none; box-shadow:none; border-radius:0;
+  padding:0 4px;
+}
+.testimonial-card:hover{ transform:none; box-shadow:none; }
+.testimonial-card::before{
+  content:"\201C"; display:block; font-family:var(--font-display); font-weight:800;
+  font-size:56px; line-height:1; color:var(--orange); opacity:.45; margin-bottom:4px;
+}
+.testimonial-card p{font-size:15.5px; color:var(--ink); margin-bottom:20px; line-height:1.5;}
 .testimonial-card footer{display:flex; flex-direction:column; font-style:normal;}
 .testimonial-card footer strong{font-size:14.5px;}
 .testimonial-card footer span{font-size:13px; color:var(--ink-faint);}
@@ -244,9 +277,14 @@ body.splash-active{ overflow:hidden; }
   padding:12px 14px; border-radius:10px; border:1.5px solid var(--border); background:var(--bg);
   font-family:inherit; font-size:15px; color:var(--ink);
 }
-.contact-form input:focus, .contact-form textarea:focus{outline:none; border-color:var(--orange);}
+.contact-form input:focus, .contact-form textarea:focus{
+  outline:none; border-color:var(--orange);
+  box-shadow:0 0 0 3px var(--orange-tint);
+}
+:focus-visible{ outline:2px solid var(--orange); outline-offset:2px; }
 .checkbox-label{display:flex; align-items:flex-start; gap:8px; font-weight:500; font-size:13px; color:var(--ink-soft);}
 .checkbox-label input{margin-top:3px;}
+.checkbox-label a{color:var(--ink); text-decoration:underline; text-underline-offset:2px;}
 .hidden-field{position:absolute; left:-9999px;}
 .form-note{font-size:12px; color:var(--ink-faint); margin-top:4px;}
 

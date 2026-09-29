@@ -20,6 +20,27 @@ if (navToggle && mainNav) {
 var yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+// ---------- Resalta en el menú la sección que se está viendo ----------
+(function scrollspy() {
+  var sections = document.querySelectorAll('main section[id]');
+  var navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
+  if (!sections.length || !navLinks.length || !('IntersectionObserver' in window)) return;
+
+  function setActive(id) {
+    navLinks.forEach(function (link) {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+    });
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) setActive(entry.target.id);
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+
+  sections.forEach(function (s) { observer.observe(s); });
+})();
+
 // ---------- Animaciones al hacer scroll (librería AOS) ----------
 if (window.AOS) {
   AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
@@ -124,14 +145,14 @@ function playChime() {
     x: function (i, target) { return target.getAttribute('data-dir') === 'left' ? -70 : 70; }
   });
   gsap.set('#splashSub', { opacity: 0, y: 10 });
-  gsap.set('#splashShine', { left: '-35%' });
+  gsap.set('#splashShine', { xPercent: 0 }); // reposa en el left:-35% fijo del CSS
 
   var tl = gsap.timeline({
     onComplete: function () { clearTimeout(safety); finish(); }
   });
   tl.to(letters, { opacity: 1, x: 0, duration: 0.55, ease: 'back.out(1.7)', stagger: 0.08 })
     .to('#splashSub', { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.15')
-    .to('#splashShine', { left: '135%', duration: 0.7, ease: 'power2.inOut' }, '-=0.1')
+    .to('#splashShine', { xPercent: 800, duration: 0.7, ease: 'power2.inOut' }, '-=0.1') // transform, no "left" (GPU-friendly)
     .to({}, { duration: 0.3 })
     .to(el, { opacity: 0, duration: 0.5, ease: 'power1.inOut' });
 })();
@@ -234,7 +255,7 @@ function playChime() {
       var p = card.querySelector('p');
       var strong = card.querySelector('footer strong');
       var span = card.querySelector('footer span');
-      if (p) p.textContent = '"' + item.quote + '"';
+      if (p) p.textContent = item.quote;
       if (strong) strong.textContent = item.name;
       if (span) span.textContent = item.role;
     });

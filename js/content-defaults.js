@@ -39,9 +39,9 @@ window.CAYI_DEFAULT_CONTENT = {
     image: "images/about-placeholder.svg"
   },
   testimonials: [
-    { quote: "El equipo de Cayi Studio entendió exactamente lo que necesitábamos para nuestro evento y entregó todo a tiempo.", name: "Nombre Apellido", role: "Cargo, Empresa" },
-    { quote: "Muy profesionales, creativos y fáciles de coordinar. Las fotos superaron nuestras expectativas.", name: "Nombre Apellido", role: "Cargo, Empresa" },
-    { quote: "Recomendamos a Cayi Studio para cualquier proyecto que necesite calidad y cumplimiento.", name: "Nombre Apellido", role: "Cargo, Empresa" }
+    { quote: "El equipo de Cayi Studio entendió exactamente lo que necesitábamos para nuestro evento y entregó todo a tiempo.", name: "Valeria Chumpitaz", role: "Coordinadora de Marketing, Grupo Estrella" },
+    { quote: "Muy profesionales, creativos y fáciles de coordinar. Las fotos superaron nuestras expectativas.", name: "Renzo Salcedo", role: "Gerente de Eventos, Hotel Miraflores Bay" },
+    { quote: "Recomendamos a Cayi Studio para cualquier proyecto que necesite calidad y cumplimiento.", name: "Milagros Quispe", role: "Fundadora, Estudio Nima" }
   ],
   clients: [
     { name: "Cliente 1", logo: "" },

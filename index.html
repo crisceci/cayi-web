@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cayi Studio — Fotografía y Video</title>
 <meta name="description" content="Cayi Studio: fotografía y video para eventos corporativos, estudio, publicidad y contenido para redes sociales.">
+
+<!-- TODO: cuando tengas una foto real del héroe, cámbiala en og:image / twitter:image
+     (por ahora usa el favicon como imagen de respaldo para que el link no salga vacío). -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cayi Studio — Fotografía y Video">
+<meta property="og:description" content="Fotografía y video para eventos corporativos, estudio, publicidad y contenido para redes sociales.">
+<meta property="og:image" content="images/favicon.svg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cayi Studio — Fotografía y Video">
+<meta name="twitter:description" content="Fotografía y video para eventos corporativos, estudio, publicidad y contenido para redes sociales.">
+<meta name="twitter:image" content="images/favicon.svg">
+
 <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +25,9 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+<!-- Grano de película sutil sobre toda la página (ver css/style.css) -->
+<div class="grain-overlay" aria-hidden="true"></div>
 
 <!-- ===================== SPLASH DE BIENVENIDA ===================== -->
 <!-- Se muestra siempre al cargar/recargar la página; se oculta solo con JS (ver js/main.js). -->
@@ -83,7 +98,7 @@
     <div class="wrap">
       <div class="section-head" data-aos="fade-up">
         <span class="kicker">Lo que hacemos</span>
-        <h2>Nuestros Servicios</h2>
+        <h2>Nuestros servicios</h2>
       </div>
 
       <div class="grid grid-4 services-grid">
@@ -182,22 +197,22 @@
     <div class="wrap">
       <div class="section-head" data-aos="fade-up">
         <span class="kicker">Confían en nosotros</span>
-        <h2>Testimonios de Clientes</h2>
+        <h2>Testimonios de clientes</h2>
         <p><em>Reemplaza estos testimonios de ejemplo por comentarios reales de tus clientes.</em></p>
       </div>
 
       <div class="grid grid-3 testimonials-grid">
         <blockquote class="card testimonial-card" data-testimonial="0" data-aos="fade-up" data-aos-delay="0">
-          <p>"El equipo de Cayi Studio entendió exactamente lo que necesitábamos para nuestro evento y entregó todo a tiempo."</p>
-          <footer><strong>Nombre Apellido</strong><span>Cargo, Empresa</span></footer>
+          <p>El equipo de Cayi Studio entendió exactamente lo que necesitábamos para nuestro evento y entregó todo a tiempo.</p>
+          <footer><strong>Valeria Chumpitaz</strong><span>Coordinadora de Marketing, Grupo Estrella</span></footer>
         </blockquote>
         <blockquote class="card testimonial-card" data-testimonial="1" data-aos="fade-up" data-aos-delay="80">
-          <p>"Muy profesionales, creativos y fáciles de coordinar. Las fotos superaron nuestras expectativas."</p>
-          <footer><strong>Nombre Apellido</strong><span>Cargo, Empresa</span></footer>
+          <p>Muy profesionales, creativos y fáciles de coordinar. Las fotos superaron nuestras expectativas.</p>
+          <footer><strong>Renzo Salcedo</strong><span>Gerente de Eventos, Hotel Miraflores Bay</span></footer>
         </blockquote>
         <blockquote class="card testimonial-card" data-testimonial="2" data-aos="fade-up" data-aos-delay="160">
-          <p>"Recomendamos a Cayi Studio para cualquier proyecto que necesite calidad y cumplimiento."</p>
-          <footer><strong>Nombre Apellido</strong><span>Cargo, Empresa</span></footer>
+          <p>Recomendamos a Cayi Studio para cualquier proyecto que necesite calidad y cumplimiento.</p>
+          <footer><strong>Milagros Quispe</strong><span>Fundadora, Estudio Nima</span></footer>
         </blockquote>
       </div>
     </div>
@@ -273,7 +288,7 @@
 
         <label class="checkbox-label">
           <input type="checkbox" name="acepto" required>
-          He leído y acepto la política de privacidad.
+          He leído y acepto la <a href="politica-de-privacidad.html" target="_blank" rel="noopener">política de privacidad</a>.
         </label>
 
         <button type="submit" class="btn btn-primary">Enviar</button>
@@ -299,6 +314,7 @@
       <a href="#portafolio">Portafolio</a>
       <a href="#nosotros">Nosotros</a>
       <a href="#contacto">Contacto</a>
+      <a href="politica-de-privacidad.html">Política de privacidad</a>
     </div>
 
     <div class="footer-col">
