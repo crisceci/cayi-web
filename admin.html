@@ -8,14 +8,14 @@
 <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <script src="js/content-defaults.js"></script>
 <style>
   :root{
-    --font-display:'Bricolage Grotesque', ui-sans-serif, sans-serif;
-    --font-body:'Manrope', system-ui, sans-serif;
+    --font-display:'Instrument Serif', Georgia, serif;
+    --font-body:'Instrument Sans', system-ui, sans-serif;
     --ink:#121212; --ink-soft:#6B6B6B; --ink-faint:#9A9A9A;
     --orange:#EF8B3C; --orange-dark:#B85F1D; --orange-tint:#FBE3C6;
     --pink:#C81760; --teal:#1C8C7C;
@@ -25,13 +25,13 @@
   }
   *{box-sizing:border-box;}
   body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body); line-height:1.5;}
-  h1,h2,h3,.brand,button{font-family:var(--font-display);}
+  h1,h2,h3,.brand{font-family:var(--font-display);}
   [hidden]{display:none !important;}
 
   /* ---------- lock ---------- */
   #lock{position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:var(--ink); z-index:1000; padding:20px;}
   .lock-card{background:var(--surface); border-radius:20px; padding:36px 30px; width:100%; max-width:360px; box-shadow:var(--shadow); text-align:center;}
-  .lock-logo{font-size:30px; font-weight:800; margin-bottom:4px;}
+  .lock-logo{font-size:30px; font-weight:700; margin-bottom:4px;}
   .lock-logo .ca{color:var(--ink);} .lock-logo .yi{color:var(--orange); font-style:italic;}
   .lock-sub{font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft); font-weight:700; margin-bottom:26px;}
   #lock-form{display:flex; flex-direction:column; gap:12px;}
@@ -42,7 +42,7 @@
   /* ---------- app ---------- */
   #app{max-width:880px; margin:0 auto; padding:24px 20px 120px;}
   .topbar{position:sticky; top:0; z-index:50; background:var(--ink); color:#fff; margin:-24px -20px 28px; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px;}
-  .topbar .brand{font-weight:800; font-size:18px;}
+  .topbar .brand{font-weight:400; font-size:20px;}
   .topbar .brand .yi{color:var(--orange); font-style:italic;}
   .topbar-actions{display:flex; align-items:center; gap:10px;}
   #saveStatus{font-size:12.5px; color:#ABABAB;}
@@ -53,7 +53,7 @@
   .config-note{background:var(--surface-2); border:1px solid var(--border); border-radius:14px; padding:16px 18px; font-size:13.5px; color:var(--ink-soft); margin-bottom:24px;}
 
   details.section{background:var(--surface); border:1px solid var(--border); border-radius:16px; margin-bottom:16px; box-shadow:var(--shadow); overflow:hidden;}
-  details.section summary{cursor:pointer; padding:18px 20px; font-family:var(--font-display); font-weight:700; font-size:16px; list-style:none; display:flex; align-items:center; justify-content:space-between;}
+  details.section summary{cursor:pointer; padding:18px 20px; font-family:var(--font-body); font-weight:700; font-size:16px; list-style:none; display:flex; align-items:center; justify-content:space-between;}
   details.section summary::-webkit-details-marker{display:none;}
   details.section summary::after{content:"+"; font-size:20px; color:var(--ink-faint);}
   details.section[open] summary::after{content:"–";}

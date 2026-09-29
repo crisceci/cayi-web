@@ -2,7 +2,7 @@
 
 Sitio web público de Cayi Studio (fotografía y video para eventos corporativos, estudio, publicidad y contenido de marca). Es un sitio estático — no necesita build ni instalar nada — con un **panel de administrador** para editar todo el contenido (textos, colores, imágenes, videos) sin tocar código.
 
-Está inspirado en la estructura de [maiafilms.pe](https://maiafilms.pe/) (productora audiovisual), pero con identidad propia de **Cayi Studio**: paleta ink/naranja, tipografía Bricolage Grotesque + Manrope, iconos de línea dibujados a mano y animaciones reales (no plantilla genérica).
+Está inspirado en la estructura de [maiafilms.pe](https://maiafilms.pe/) (productora audiovisual), pero con identidad propia de **Cayi Studio**: paleta ink/naranja, tipografía editorial Instrument Serif + Instrument Sans, iconos de línea dibujados a mano y animaciones reales (no plantilla genérica).
 
 ### Pasada de rediseño (auditoría anti-genérico)
 
@@ -100,7 +100,11 @@ El diseño usa **blanco + ink + naranja** como base (como el header negro y los 
 
 ### Tipografía
 
-`Bricolage Grotesque` (titulares, con carácter editorial) + `Manrope` (texto de cuerpo), cargadas gratis desde Google Fonts. Si quieres probar otra combinación, cámbiala en la línea `<link href="https://fonts.googleapis.com/css2?family=...">` de `index.html` y en `--font-display`/`--font-body` de `css/style.css`.
+`Instrument Serif` (titulares y logo — serif editorial, poco común en plantillas de IA, por eso se ve menos genérico) + `Instrument Sans` (texto de cuerpo, botones, menú), cargadas gratis desde Google Fonts. Instrument Serif solo trae el peso Regular (400) + cursiva — por diseño, los títulos ya no usan negrita, el tamaño grande les da la presencia. Si quieres probar otra combinación, cámbiala en la línea `<link href="https://fonts.googleapis.com/css2?family=...">` de `index.html`, `admin.html` y `politica-de-privacidad.html`, y en `--font-display`/`--font-body` de `css/style.css` (y en `admin.html`, que tiene sus propias variables).
+
+### Fotos de referencia
+
+El héroe, "Nosotros", las 6 tarjetas de Portafolio y los avatares de Testimonios usan fotos de [picsum.photos](https://picsum.photos) (con una URL fija por `seed`, así no cambian entre recargas) para que puedas ver cómo se ve la web con fotos reales en vez de placeholders vacíos. Tienen un filtro CSS de "duotono" (`--ink` → `--orange`, ver sección "Tratamiento de marca para fotos de referencia" en `css/style.css`) para que fotos de stock random se sientan parte del mismo sistema visual en vez de imágenes sueltas — el filtro se aplica a cualquier imagen automáticamente, así que tus fotos reales también lo van a tener a menos que lo quites. Reemplaza estas URLs por tus fotos reales desde el panel de administrador (o directamente en el HTML) en cuanto las tengas — son de un banco de imágenes genérico, no fotos reales de Cayi Studio.
 
 ### El formulario de contacto (funciona en cualquier hosting)
 
@@ -136,4 +140,5 @@ El panel de administrador y el formulario de contacto funcionan igual en cualqui
 - `js/content-defaults.js` — el contenido de ejemplo/por defecto, compartido entre `index.html` y `admin.html`.
 - `supabase-config.js` — tus credenciales de Supabase (edítalo, no lo borres).
 - `supabase-schema.sql` — el script que crea la tabla y el bucket en Supabase (solo se usa una vez).
-- `images/` — imágenes placeholder (reemplázalas desde el panel o directamente en la carpeta).
+- `images/` — solo el favicon local; las fotos de referencia se cargan desde picsum.photos (ver arriba) hasta que subas las tuyas.
+- `politica-de-privacidad.html` — página legal básica enlazada desde el footer y el checkbox del formulario (texto de partida, revísalo antes de publicar).

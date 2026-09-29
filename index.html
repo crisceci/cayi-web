@@ -20,7 +20,7 @@
 <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -88,7 +88,7 @@
            o reemplaza directamente el <img> de abajo por
            <video autoplay muted loop playsinline src="tu-reel.mp4"></video> -->
       <div class="hero-media" data-hero-media>
-        <img id="heroMedia" src="images/hero-reel-placeholder.svg" alt="Reel de Cayi Studio — súbelo desde el panel de administrador" loading="eager">
+        <img id="heroMedia" src="https://picsum.photos/seed/cayi-hero-reel/900/1125" alt="Foto de referencia — sube tu reel real desde el panel de administrador" loading="eager">
       </div>
     </div>
   </section>
@@ -147,29 +147,32 @@
         <p>Cada proyecto es distinto, pero todos comparten el mismo estándar: cuidado en la imagen y cumplimiento en la entrega. Aquí un adelanto de los formatos en los que trabajamos — <em>reemplaza estas tarjetas por tus propios proyectos y fotos</em>:</p>
       </div>
 
+      <!-- TODO: son fotos de referencia (stock genérico de picsum.photos, con un tinte
+           de marca encima) solo para que veas cómo se ve la grilla con fotos reales.
+           Reemplázalas por tus propios proyectos desde el panel de administrador. -->
       <div class="grid grid-3 portfolio-grid">
         <article class="card portfolio-card" data-portfolio="0" data-aos="fade-up" data-aos-delay="0">
-          <img src="images/portfolio-1.svg" alt="Placeholder — Evento Corporativo">
+          <div class="portfolio-media"><img src="https://picsum.photos/seed/cayi-corporativo/800/600" alt="Foto de referencia — Evento Corporativo" loading="lazy"></div>
           <div class="card-body"><h3>Evento Corporativo</h3><p>Nombre del cliente</p></div>
         </article>
         <article class="card portfolio-card" data-portfolio="1" data-aos="fade-up" data-aos-delay="80">
-          <img src="images/portfolio-2.svg" alt="Placeholder — Sesión de Estudio">
+          <div class="portfolio-media"><img src="https://picsum.photos/seed/cayi-estudio/800/600" alt="Foto de referencia — Sesión de Estudio" loading="lazy"></div>
           <div class="card-body"><h3>Sesión de Estudio</h3><p>Nombre del cliente</p></div>
         </article>
         <article class="card portfolio-card" data-portfolio="2" data-aos="fade-up" data-aos-delay="160">
-          <img src="images/portfolio-3.svg" alt="Placeholder — Campaña Publicitaria">
+          <div class="portfolio-media"><img src="https://picsum.photos/seed/cayi-publicidad/800/600" alt="Foto de referencia — Campaña Publicitaria" loading="lazy"></div>
           <div class="card-body"><h3>Campaña Publicitaria</h3><p>Nombre del cliente</p></div>
         </article>
         <article class="card portfolio-card" data-portfolio="3" data-aos="fade-up" data-aos-delay="0">
-          <img src="images/portfolio-4.svg" alt="Placeholder — Contenido para Redes">
+          <div class="portfolio-media"><img src="https://picsum.photos/seed/cayi-redes/800/600" alt="Foto de referencia — Contenido para Redes" loading="lazy"></div>
           <div class="card-body"><h3>Contenido para Redes</h3><p>Nombre del cliente</p></div>
         </article>
         <article class="card portfolio-card" data-portfolio="4" data-aos="fade-up" data-aos-delay="80">
-          <img src="images/portfolio-5.svg" alt="Placeholder — Retrato Profesional">
+          <div class="portfolio-media"><img src="https://picsum.photos/seed/cayi-retrato/800/600" alt="Foto de referencia — Retrato Profesional" loading="lazy"></div>
           <div class="card-body"><h3>Retrato Profesional</h3><p>Nombre del cliente</p></div>
         </article>
         <article class="card portfolio-card" data-portfolio="5" data-aos="fade-up" data-aos-delay="160">
-          <img src="images/portfolio-6.svg" alt="Placeholder — Backstage de Evento">
+          <div class="portfolio-media"><img src="https://picsum.photos/seed/cayi-backstage/800/600" alt="Foto de referencia — Backstage de Evento" loading="lazy"></div>
           <div class="card-body"><h3>Backstage de Evento</h3><p>Nombre del cliente</p></div>
         </article>
       </div>
@@ -180,7 +183,7 @@
   <section class="section about-section" id="nosotros">
     <div class="wrap about-inner">
       <div class="about-media" data-aos="fade-right">
-        <img id="aboutImg" src="images/about-placeholder.svg" alt="Foto del equipo de Cayi Studio">
+        <img id="aboutImg" src="https://picsum.photos/seed/cayi-equipo/1000/900" alt="Foto de referencia del equipo de Cayi Studio">
       </div>
       <div class="about-copy" data-aos="fade-left">
         <span class="kicker">Quiénes somos</span>
@@ -204,15 +207,24 @@
       <div class="grid grid-3 testimonials-grid">
         <blockquote class="card testimonial-card" data-testimonial="0" data-aos="fade-up" data-aos-delay="0">
           <p>El equipo de Cayi Studio entendió exactamente lo que necesitábamos para nuestro evento y entregó todo a tiempo.</p>
-          <footer><strong>Valeria Chumpitaz</strong><span>Coordinadora de Marketing, Grupo Estrella</span></footer>
+          <footer>
+            <img class="testi-avatar" src="https://picsum.photos/seed/cayi-testi-1/80/80" alt="" loading="lazy">
+            <div><strong>Valeria Chumpitaz</strong><span>Coordinadora de Marketing, Grupo Estrella</span></div>
+          </footer>
         </blockquote>
         <blockquote class="card testimonial-card" data-testimonial="1" data-aos="fade-up" data-aos-delay="80">
           <p>Muy profesionales, creativos y fáciles de coordinar. Las fotos superaron nuestras expectativas.</p>
-          <footer><strong>Renzo Salcedo</strong><span>Gerente de Eventos, Hotel Miraflores Bay</span></footer>
+          <footer>
+            <img class="testi-avatar" src="https://picsum.photos/seed/cayi-testi-2/80/80" alt="" loading="lazy">
+            <div><strong>Renzo Salcedo</strong><span>Gerente de Eventos, Hotel Miraflores Bay</span></div>
+          </footer>
         </blockquote>
         <blockquote class="card testimonial-card" data-testimonial="2" data-aos="fade-up" data-aos-delay="160">
           <p>Recomendamos a Cayi Studio para cualquier proyecto que necesite calidad y cumplimiento.</p>
-          <footer><strong>Milagros Quispe</strong><span>Fundadora, Estudio Nima</span></footer>
+          <footer>
+            <img class="testi-avatar" src="https://picsum.photos/seed/cayi-testi-3/80/80" alt="" loading="lazy">
+            <div><strong>Milagros Quispe</strong><span>Fundadora, Estudio Nima</span></div>
+          </footer>
         </blockquote>
       </div>
     </div>

@@ -16,15 +16,15 @@ window.CAYI_DEFAULT_CONTENT = {
     title: "Más que fotografía y video,<br> construimos la imagen de tu marca.",
     p1: "¿Necesitas contenido visual que conecte con tu público? En <strong>Cayi Studio</strong> creamos fotografía y video con una mirada cuidada, pensados para que tu marca, tu evento o tu producto se vean como se merecen.",
     p2: "Trabajamos eventos corporativos, sesiones de estudio, campañas publicitarias y contenido para redes sociales — todo con el mismo cuidado en cada detalle, desde la primera idea hasta la entrega final.",
-    media: "images/hero-reel-placeholder.svg"
+    media: "https://picsum.photos/seed/cayi-hero-reel/900/1125"
   },
   portfolio: [
-    { title: "Evento Corporativo",     client: "Nombre del cliente", image: "images/portfolio-1.svg" },
-    { title: "Sesión de Estudio",      client: "Nombre del cliente", image: "images/portfolio-2.svg" },
-    { title: "Campaña Publicitaria",   client: "Nombre del cliente", image: "images/portfolio-3.svg" },
-    { title: "Contenido para Redes",   client: "Nombre del cliente", image: "images/portfolio-4.svg" },
-    { title: "Retrato Profesional",    client: "Nombre del cliente", image: "images/portfolio-5.svg" },
-    { title: "Backstage de Evento",    client: "Nombre del cliente", image: "images/portfolio-6.svg" }
+    { title: "Evento Corporativo",     client: "Nombre del cliente", image: "https://picsum.photos/seed/cayi-corporativo/800/600" },
+    { title: "Sesión de Estudio",      client: "Nombre del cliente", image: "https://picsum.photos/seed/cayi-estudio/800/600" },
+    { title: "Campaña Publicitaria",   client: "Nombre del cliente", image: "https://picsum.photos/seed/cayi-publicidad/800/600" },
+    { title: "Contenido para Redes",   client: "Nombre del cliente", image: "https://picsum.photos/seed/cayi-redes/800/600" },
+    { title: "Retrato Profesional",    client: "Nombre del cliente", image: "https://picsum.photos/seed/cayi-retrato/800/600" },
+    { title: "Backstage de Evento",    client: "Nombre del cliente", image: "https://picsum.photos/seed/cayi-backstage/800/600" }
   ],
   services: [
     { title: "Fotografía y Video para Eventos Corporativos", desc: "Cobertura fotográfica y de video para conferencias, lanzamientos, workshops y celebraciones de empresa. Capturamos los momentos clave para que tu evento siga contando su historia después de terminado." },
@@ -36,7 +36,7 @@ window.CAYI_DEFAULT_CONTENT = {
     title: "Un equipo que cree que cada imagen debe contar algo",
     p1: "Somos <strong>Cayi Studio</strong>, un equipo de fotografía y video que trabaja de cerca con cada cliente para entender qué necesita comunicar — y traducirlo en imágenes que se sostienen en el tiempo.",
     p2: "Desde una sesión de estudio hasta la cobertura completa de un evento corporativo, cuidamos cada detalle: la luz, el encuadre, el tiempo de entrega.",
-    image: "images/about-placeholder.svg"
+    image: "https://picsum.photos/seed/cayi-equipo/1000/900"
   },
   testimonials: [
     { quote: "El equipo de Cayi Studio entendió exactamente lo que necesitábamos para nuestro evento y entregó todo a tiempo.", name: "Valeria Chumpitaz", role: "Coordinadora de Marketing, Grupo Estrella" },
