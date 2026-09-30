@@ -90,8 +90,8 @@ body.splash-active{ overflow:hidden; }
 .navbar-inner{display:flex; align-items:center; justify-content:space-between; height:76px; gap:24px;}
 
 .nav-logo{display:inline-flex; align-items:center;}
-.logo-img{height:48px; width:auto; display:block;}
-.logo-img-footer{height:52px; margin-bottom:6px;}
+.logo-img{height:60px; width:auto; display:block;}
+.logo-img-footer{height:64px; margin-bottom:6px;}
 
 .nav-links{display:flex; align-items:center; gap:32px;}
 .nav-links a{font-weight:600; font-size:14px; color:#9CA3AF; transition:color .15s; position:relative;}
