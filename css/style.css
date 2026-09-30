@@ -55,14 +55,14 @@ body.splash-active{ overflow:hidden; }
   font-family:var(--font-display); font-weight:800;
   font-size:clamp(44px, 9vw, 84px); color:#F7F7F5; line-height:1; padding:0 .05em;
 }
-.splash-letter{ display:inline-block; opacity:0; will-change:transform, opacity; }
+.splash-letter{ display:inline-block; opacity:0; will-change:transform, opacity; color:var(--pink); }
 .splash-letter.accent{ color:var(--orange); }
 .splash-shine{
   position:absolute; top:-20%; left:-35%; width:22%; height:140%;
   background:linear-gradient(115deg, transparent 0%, rgba(255,255,255,.05) 35%, rgba(255,255,255,.9) 50%, rgba(255,255,255,.05) 65%, transparent 100%);
   transform:skewX(-18deg); pointer-events:none; mix-blend-mode:overlay;
 }
-.splash-sub{ margin-top:14px; font-weight:700; font-size:clamp(11px, 1.6vw, 14px); letter-spacing:.4em; text-transform:uppercase; color:#9CA3AF; opacity:0; }
+.splash-sub{ margin-top:14px; font-weight:700; font-size:clamp(11px, 1.6vw, 14px); letter-spacing:.4em; text-transform:uppercase; color:var(--orange); opacity:0; }
 
 /* ---------- cursor personalizado (solo desktop con mouse fino) ---------- */
 .cursor-dot{
@@ -89,8 +89,9 @@ body.splash-active{ overflow:hidden; }
 }
 .navbar-inner{display:flex; align-items:center; justify-content:space-between; height:76px; gap:24px;}
 
-.nav-logo{font-size:20px; font-weight:800; color:#F7F7F5; letter-spacing:-.01em;}
-.nav-logo span{color:var(--orange);}
+.nav-logo{display:inline-flex; align-items:center;}
+.logo-img{height:30px; width:auto; display:block;}
+.logo-img-footer{height:34px; margin-bottom:6px;}
 
 .nav-links{display:flex; align-items:center; gap:32px;}
 .nav-links a{font-weight:600; font-size:14px; color:#9CA3AF; transition:color .15s; position:relative;}

@@ -31,8 +31,7 @@
   /* ---------- lock ---------- */
   #lock{position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:var(--ink); z-index:1000; padding:20px;}
   .lock-card{background:var(--surface); border-radius:20px; padding:36px 30px; width:100%; max-width:360px; box-shadow:var(--shadow); text-align:center;}
-  .lock-logo{font-size:30px; font-weight:700; margin-bottom:4px;}
-  .lock-logo .ca{color:var(--ink);} .lock-logo .yi{color:var(--teal);}
+  .lock-logo-img{display:block; height:46px; margin:0 auto 4px;}
   .lock-sub{font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft); font-weight:700; margin-bottom:26px;}
   #lock-form{display:flex; flex-direction:column; gap:12px;}
   #lock-pass{padding:13px 14px; border-radius:12px; border:1.5px solid var(--border); background:var(--bg); font-size:15px; text-align:center;}
@@ -42,8 +41,8 @@
   /* ---------- app ---------- */
   #app{max-width:880px; margin:0 auto; padding:24px 20px 120px;}
   .topbar{position:sticky; top:0; z-index:50; background:var(--ink); color:#fff; margin:-24px -20px 28px; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px;}
-  .topbar .brand{font-weight:800; font-size:18px;}
-  .topbar .brand .yi{color:var(--teal);}
+  .topbar .brand{font-weight:800; font-size:18px; display:inline-flex; align-items:center; gap:8px;}
+  .topbar-logo-img{height:22px;}
   .topbar-actions{display:flex; align-items:center; gap:10px;}
   #saveStatus{font-size:12.5px; color:#ABABAB;}
   #saveBtn{background:var(--teal); color:var(--ink); border:none; padding:10px 20px; border-radius:999px; font-weight:700; cursor:pointer;}
@@ -86,7 +85,7 @@
 <!-- ===================== LOCK ===================== -->
 <div id="lock">
   <div class="lock-card">
-    <div class="lock-logo"><span class="ca">Ca</span><span class="yi">yi</span></div>
+    <img src="images/logo.png" alt="Cayi Studio" class="lock-logo-img">
     <div class="lock-sub">Administrador de la web</div>
     <form id="lock-form">
       <input id="lock-pass" type="password" placeholder="Contraseña" autocomplete="off" autofocus>
@@ -99,7 +98,7 @@
 <!-- ===================== APP ===================== -->
 <div id="app" hidden>
   <div class="topbar">
-    <span class="brand"><span class="ca">Ca</span><span class="yi">yi</span> Admin</span>
+    <span class="brand"><img src="images/logo.png" alt="Cayi Studio" class="topbar-logo-img"> Admin</span>
     <div class="topbar-actions">
       <a id="viewSiteLink" href="index.html" target="_blank">Ver la web ↗</a>
       <span id="saveStatus"></span>
