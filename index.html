@@ -68,14 +68,20 @@
 
   <!-- ===================== HERO ===================== -->
   <section class="hero" id="inicio">
+    <!-- Video de fondo del héroe. TODO: coloca tu archivo real en videos/cayi-hero.mp4
+         (ver videos/README.md). Mientras ese archivo no exista, el navegador muestra
+         el "poster" (images/hero-placeholder.svg) como fondo fijo — la sección se sigue
+         viendo bien, solo sin movimiento. El panel de administrador (campo "Video del
+         héroe") también puede reemplazar esto por una URL propia en cualquier momento. -->
     <div class="hero-bg" data-hero-media>
-      <img id="heroMedia" src="images/hero-placeholder.svg" alt="Foto de referencia — sube tu reel real desde el panel de administrador" loading="eager">
+      <video id="heroMedia" autoplay muted loop playsinline poster="images/hero-placeholder.svg" aria-label="Reel de Cayi Studio">
+        <source src="videos/cayi-hero.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="hero-content wrap">
       <span class="hero-tag">Cayi Studio</span>
-      <h1 id="heroTitle">Más que fotografía.<br>Construimos la imagen<br>de tu marca.</h1>
-      <p id="heroP1">¿Necesitas contenido visual que conecte con tu público? En <strong>Cayi Studio</strong> creamos fotografía y video con una mirada cuidada, pensados para que tu marca, tu evento o tu producto se vean como se merecen.</p>
-      <p id="heroP2">Trabajamos eventos corporativos, sesiones de estudio, campañas publicitarias y contenido para redes sociales — todo con el mismo cuidado en cada detalle, desde la primera idea hasta la entrega final.</p>
+      <h1 id="heroTitle">Creamos imágenes<br>que hacen ver<br>tu marca diferente.</h1>
+      <p id="heroP1">Fotografía · Video · Producción visual</p>
       <div class="hero-actions" id="heroActions">
         <a href="#portafolio" class="btn btn-primary" id="heroEyebrow">Ver Portafolio</a>
         <a href="#contacto" class="btn btn-secondary">Hablemos</a>

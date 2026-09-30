@@ -78,15 +78,14 @@ if (window.AOS) {
 // ---------- Entrada del héroe (GSAP) — se dispara después del splash ----------
 function playHeroEntrance() {
   if (!window.gsap) return;
-  var targets = ['.hero-tag', '#heroTitle', '#heroP1', '#heroP2', '#heroActions'];
+  var targets = ['.hero-tag', '#heroTitle', '#heroP1', '#heroActions'];
   gsap.set(targets, { opacity: 0, y: 26 });
   gsap.set('.hero-bg', { opacity: 0, scale: 1.08 });
   gsap.to('.hero-bg', { opacity: 1, scale: 1, duration: 1.1, ease: 'power2.out' });
   gsap.to('.hero-tag', { opacity: 1, y: 0, duration: 0.6, delay: 0.25, ease: 'power2.out' });
   gsap.to('#heroTitle', { opacity: 1, y: 0, duration: 0.75, delay: 0.36, ease: 'power2.out' });
   gsap.to('#heroP1', { opacity: 1, y: 0, duration: 0.7, delay: 0.5, ease: 'power2.out' });
-  gsap.to('#heroP2', { opacity: 1, y: 0, duration: 0.7, delay: 0.58, ease: 'power2.out' });
-  gsap.to('#heroActions', { opacity: 1, y: 0, duration: 0.7, delay: 0.68, ease: 'power2.out' });
+  gsap.to('#heroActions', { opacity: 1, y: 0, duration: 0.7, delay: 0.6, ease: 'power2.out' });
 }
 
 // ---------- Sonido de bienvenida (sintetizado, sin archivos de audio) ----------

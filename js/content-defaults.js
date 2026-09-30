@@ -13,10 +13,10 @@ window.CAYI_DEFAULT_CONTENT = {
   },
   hero: {
     eyebrow: "Ver Portafolio",
-    title: "Más que fotografía.<br>Construimos la imagen<br>de tu marca.",
-    p1: "¿Necesitas contenido visual que conecte con tu público? En <strong>Cayi Studio</strong> creamos fotografía y video con una mirada cuidada, pensados para que tu marca, tu evento o tu producto se vean como se merecen.",
-    p2: "Trabajamos eventos corporativos, sesiones de estudio, campañas publicitarias y contenido para redes sociales — todo con el mismo cuidado en cada detalle, desde la primera idea hasta la entrega final.",
-    media: "images/hero-placeholder.svg"
+    title: "Creamos imágenes<br>que hacen ver<br>tu marca diferente.",
+    p1: "Fotografía · Video · Producción visual",
+    p2: "",
+    media: "videos/cayi-hero.mp4"
   },
   portfolio: [
     { title: "Evento Corporativo",     category: "eventos",    client: "", image: "images/portfolio-eventos.svg" },
