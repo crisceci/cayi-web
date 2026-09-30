@@ -8,20 +8,20 @@
 <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <script src="js/content-defaults.js"></script>
 <style>
   :root{
-    --font-display:'Lexend', system-ui, sans-serif;
-    --font-body:'Lexend', system-ui, sans-serif;
-    --ink:#121212; --ink-soft:#6B6B6B; --ink-faint:#9A9A9A;
-    --orange:#EF8B3C; --orange-dark:#B85F1D; --orange-tint:#FBE3C6;
-    --pink:#C81760; --teal:#1C8C7C;
-    --bg:#FFFFFF; --surface:#FFFFFF; --surface-2:#F6F6F6;
-    --border:#E5E5E5;
-    --shadow:0 1px 2px rgba(0,0,0,.05), 0 8px 24px -12px rgba(0,0,0,.16);
+    --font-display:'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-body:'Plus Jakarta Sans', system-ui, sans-serif;
+    --ink:#08090B; --ink-soft:#4B5058; --ink-faint:#9CA3AF;
+    --orange:#F59E0B; --orange-dark:#B87309; --orange-tint:#FCEACB;
+    --pink:#EC4899; --teal:#20C997;
+    --bg:#F7F7F5; --surface:#FFFFFF; --surface-2:#ECECE9;
+    --border:#E4E4E1;
+    --shadow:0 1px 2px rgba(8,9,11,.05), 0 8px 24px -12px rgba(8,9,11,.16);
   }
   *{box-sizing:border-box;}
   body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body); line-height:1.5;}
@@ -32,21 +32,21 @@
   #lock{position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:var(--ink); z-index:1000; padding:20px;}
   .lock-card{background:var(--surface); border-radius:20px; padding:36px 30px; width:100%; max-width:360px; box-shadow:var(--shadow); text-align:center;}
   .lock-logo{font-size:30px; font-weight:700; margin-bottom:4px;}
-  .lock-logo .ca{color:var(--ink);} .lock-logo .yi{color:var(--orange);}
+  .lock-logo .ca{color:var(--ink);} .lock-logo .yi{color:var(--teal);}
   .lock-sub{font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft); font-weight:700; margin-bottom:26px;}
   #lock-form{display:flex; flex-direction:column; gap:12px;}
   #lock-pass{padding:13px 14px; border-radius:12px; border:1.5px solid var(--border); background:var(--bg); font-size:15px; text-align:center;}
-  .lock-btn{padding:13px 14px; border-radius:12px; border:none; cursor:pointer; font-weight:700; font-size:15px; color:#fff; background:var(--orange);}
+  .lock-btn{padding:13px 14px; border-radius:12px; border:none; cursor:pointer; font-weight:700; font-size:15px; color:var(--ink); background:var(--teal);}
   .lock-error{color:#B23A48; font-size:13px; min-height:18px;}
 
   /* ---------- app ---------- */
   #app{max-width:880px; margin:0 auto; padding:24px 20px 120px;}
   .topbar{position:sticky; top:0; z-index:50; background:var(--ink); color:#fff; margin:-24px -20px 28px; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px;}
   .topbar .brand{font-weight:800; font-size:18px;}
-  .topbar .brand .yi{color:var(--orange);}
+  .topbar .brand .yi{color:var(--teal);}
   .topbar-actions{display:flex; align-items:center; gap:10px;}
   #saveStatus{font-size:12.5px; color:#ABABAB;}
-  #saveBtn{background:var(--orange); color:var(--ink); border:none; padding:10px 20px; border-radius:999px; font-weight:700; cursor:pointer;}
+  #saveBtn{background:var(--teal); color:var(--ink); border:none; padding:10px 20px; border-radius:999px; font-weight:700; cursor:pointer;}
   #saveBtn:disabled{opacity:.6; cursor:default;}
   #viewSiteLink{color:#FAFAFA; font-size:13px; text-decoration:underline;}
 
@@ -65,18 +65,18 @@
 
   .field{margin-bottom:12px;}
   .field label{display:block; font-weight:700; font-size:13px; margin-bottom:5px;}
-  .field input[type=text], .field input[type=email], .field textarea{
+  .field input[type=text], .field input[type=email], .field textarea, .field select{
     width:100%; padding:10px 12px; border-radius:10px; border:1.5px solid var(--border); background:var(--bg);
     font-family:inherit; font-size:14.5px; color:var(--ink);
   }
   .field textarea{min-height:70px; resize:vertical;}
-  .field input:focus, .field textarea:focus{outline:none; border-color:var(--orange);}
+  .field input:focus, .field textarea:focus, .field select:focus{outline:none; border-color:var(--teal);}
   .field input[type=color]{width:56px; height:36px; border:1.5px solid var(--border); border-radius:8px; padding:2px; background:var(--surface);}
 
   .media-row{display:flex; gap:10px; align-items:flex-start; flex-wrap:wrap;}
   .media-row input[type=text]{flex:1; min-width:180px;}
   .upload-btn{background:var(--surface-2); border:1.5px solid var(--border); border-radius:10px; padding:9px 14px; font-size:13px; font-weight:700; cursor:pointer; white-space:nowrap;}
-  .upload-btn:hover{border-color:var(--orange);}
+  .upload-btn:hover{border-color:var(--teal);}
   .media-preview{width:56px; height:56px; border-radius:8px; object-fit:cover; border:1px solid var(--border); background:var(--bg); flex-shrink:0;}
   .upload-status{font-size:12px; color:var(--ink-faint); width:100%;}
 </style>
@@ -128,12 +128,19 @@ var SECTIONS = [
   ]},
   { key: 'portfolio', label: 'Portafolio', type: 'array', itemLabel: function(i){ return 'Proyecto ' + (i+1); }, fields: [
       { name: 'title', label: 'Título', type: 'text' },
-      { name: 'client', label: 'Cliente', type: 'text' },
+      { name: 'category', label: 'Categoría (para los filtros)', type: 'select', options: [
+          { value: 'eventos', label: 'Eventos' },
+          { value: 'estudio', label: 'Estudio' },
+          { value: 'publicidad', label: 'Publicidad' },
+          { value: 'contenido', label: 'Contenido' }
+      ] },
+      { name: 'client', label: 'Cliente (opcional, déjalo vacío si aún no tienes el dato real)', type: 'text' },
       { name: 'image', label: 'Imagen', type: 'media' }
   ]},
   { key: 'services', label: 'Servicios', type: 'array', itemLabel: function(i){ return 'Servicio ' + (i+1); }, fields: [
       { name: 'title', label: 'Título', type: 'text' },
-      { name: 'desc', label: 'Descripción', type: 'textarea' }
+      { name: 'desc', label: 'Descripción', type: 'textarea' },
+      { name: 'image', label: 'Imagen (aparece al pasar el mouse sobre la fila)', type: 'media' }
   ]},
   { key: 'about', label: 'Nosotros', type: 'object', fields: [
       { name: 'title', label: 'Título', type: 'text' },
@@ -159,10 +166,10 @@ var SECTIONS = [
       { name: 'tiktok', label: 'URL de TikTok', type: 'text' }
   ]},
   { key: 'colors', label: 'Colores de marca', type: 'object', fields: [
-      { name: 'ink', label: 'Ink (header, footer, fondos oscuros)', type: 'color' },
-      { name: 'orange', label: 'Naranja (acento principal)', type: 'color' },
-      { name: 'pink', label: 'Rosa (detalles pequeños)', type: 'color' },
-      { name: 'teal', label: 'Teal (botón "Ver Portafolio")', type: 'color' }
+      { name: 'ink', label: 'Ink (navbar, footer, fondos oscuros)', type: 'color' },
+      { name: 'orange', label: 'Naranja (acento principal — botones, foco)', type: 'color' },
+      { name: 'pink', label: 'Rosa (acento secundario — algunos hover)', type: 'color' },
+      { name: 'teal', label: 'Teal (detalle puntual — tinte de las fotos)', type: 'color' }
   ]}
 ];
 
@@ -184,6 +191,12 @@ function renderField(sectionKey, index, field) {
     html += '<textarea id="' + id + '" data-field="' + id + '"></textarea>';
   } else if (field.type === 'color') {
     html += '<input type="color" id="' + id + '" data-field="' + id + '">';
+  } else if (field.type === 'select') {
+    html += '<select id="' + id + '" data-field="' + id + '">';
+    field.options.forEach(function (opt) {
+      html += '<option value="' + opt.value + '">' + opt.label + '</option>';
+    });
+    html += '</select>';
   } else if (field.type === 'media') {
     html += '<div class="media-row">';
     html += '<img class="media-preview" id="' + id + '__preview" alt="">';

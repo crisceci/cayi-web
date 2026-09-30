@@ -6,37 +6,37 @@
 // como respaldo si Supabase no responde.
 window.CAYI_DEFAULT_CONTENT = {
   colors: {
-    ink: "#121212",
+    ink: "#08090B",
     orange: "#EF8B3C",
     pink: "#C81760",
-    teal: "#1C8C7C"
+    teal: "#20C997"
   },
   hero: {
     eyebrow: "Ver Portafolio",
-    title: "Más que fotografía y video,<br> construimos la imagen de tu marca.",
+    title: "Más que fotografía.<br>Construimos la imagen<br>de tu marca.",
     p1: "¿Necesitas contenido visual que conecte con tu público? En <strong>Cayi Studio</strong> creamos fotografía y video con una mirada cuidada, pensados para que tu marca, tu evento o tu producto se vean como se merecen.",
     p2: "Trabajamos eventos corporativos, sesiones de estudio, campañas publicitarias y contenido para redes sociales — todo con el mismo cuidado en cada detalle, desde la primera idea hasta la entrega final.",
-    media: "https://picsum.photos/seed/cayi-hero-reel/900/1125"
+    media: "images/hero-placeholder.svg"
   },
   portfolio: [
-    { title: "Evento Corporativo",     client: "Nombre del cliente", image: "https://picsum.photos/seed/cayi-corporativo/800/600" },
-    { title: "Sesión de Estudio",      client: "Nombre del cliente", image: "https://picsum.photos/seed/cayi-estudio/800/600" },
-    { title: "Campaña Publicitaria",   client: "Nombre del cliente", image: "https://picsum.photos/seed/cayi-publicidad/800/600" },
-    { title: "Contenido para Redes",   client: "Nombre del cliente", image: "https://picsum.photos/seed/cayi-redes/800/600" },
-    { title: "Retrato Profesional",    client: "Nombre del cliente", image: "https://picsum.photos/seed/cayi-retrato/800/600" },
-    { title: "Backstage de Evento",    client: "Nombre del cliente", image: "https://picsum.photos/seed/cayi-backstage/800/600" }
+    { title: "Evento Corporativo",     category: "eventos",    client: "", image: "images/portfolio-eventos.svg" },
+    { title: "Sesión de Estudio",      category: "estudio",    client: "", image: "images/portfolio-estudio.svg" },
+    { title: "Campaña Publicitaria",   category: "publicidad", client: "", image: "images/portfolio-publicidad.svg" },
+    { title: "Contenido para Redes",   category: "contenido",  client: "", image: "images/portfolio-contenido.svg" },
+    { title: "Retrato Profesional",    category: "estudio",    client: "", image: "images/portfolio-retrato.svg" },
+    { title: "Backstage de Evento",    category: "eventos",    client: "", image: "images/portfolio-backstage.svg" }
   ],
   services: [
-    { title: "Fotografía y Video para Eventos Corporativos", desc: "Cobertura fotográfica y de video para conferencias, lanzamientos, workshops y celebraciones de empresa. Capturamos los momentos clave para que tu evento siga contando su historia después de terminado." },
-    { title: "Fotografía de Estudio", desc: "Sesiones en estudio con iluminación controlada para retratos corporativos, equipos de trabajo, productos o books personales — resultados consistentes y de alta calidad." },
-    { title: "Fotografía Publicitaria", desc: "Imágenes pensadas para vender: producto, campaña o marca, con dirección de arte enfocada en lo que tu audiencia necesita ver para conectar y convertir." },
-    { title: "Creación de Contenido", desc: "Fotografía y video para Instagram, TikTok y el resto de tus redes — contenido pensado para el feed, las historias y los formatos que tu marca necesita en el día a día." }
+    { title: "Eventos Corporativos", desc: "Cobertura fotográfica y de video para conferencias, lanzamientos, workshops y celebraciones de empresa. Capturamos los momentos clave para que tu evento siga contando su historia después de terminado.", image: "images/service-eventos.svg" },
+    { title: "Fotografía de Estudio", desc: "Sesiones en estudio con iluminación controlada para retratos corporativos, equipos de trabajo, productos o books personales — resultados consistentes y de alta calidad.", image: "images/service-estudio.svg" },
+    { title: "Fotografía Publicitaria", desc: "Imágenes pensadas para vender: producto, campaña o marca, con dirección de arte enfocada en lo que tu audiencia necesita ver para conectar y convertir.", image: "images/service-publicidad.svg" },
+    { title: "Creación de Contenido", desc: "Fotografía y video para Instagram, TikTok y el resto de tus redes — contenido pensado para el feed, las historias y los formatos que tu marca necesita en el día a día.", image: "images/service-contenido.svg" }
   ],
   about: {
-    title: "Un equipo que cree que cada imagen debe contar algo",
+    title: "No solo hacemos imágenes.<br>Creamos la forma en la que<br>tu marca es recordada.",
     p1: "Somos <strong>Cayi Studio</strong>, un equipo de fotografía y video que trabaja de cerca con cada cliente para entender qué necesita comunicar — y traducirlo en imágenes que se sostienen en el tiempo.",
     p2: "Desde una sesión de estudio hasta la cobertura completa de un evento corporativo, cuidamos cada detalle: la luz, el encuadre, el tiempo de entrega.",
-    image: "https://picsum.photos/seed/cayi-equipo/1000/900"
+    image: "images/about-placeholder.svg"
   },
   testimonials: [
     { quote: "El equipo de Cayi Studio entendió exactamente lo que necesitábamos para nuestro evento y entregó todo a tiempo.", name: "Valeria Chumpitaz", role: "Coordinadora de Marketing, Grupo Estrella" },

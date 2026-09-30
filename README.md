@@ -2,23 +2,28 @@
 
 Sitio web público de Cayi Studio (fotografía y video para eventos corporativos, estudio, publicidad y contenido de marca). Es un sitio estático — no necesita build ni instalar nada — con un **panel de administrador** para editar todo el contenido (textos, colores, imágenes, videos) sin tocar código.
 
-Está inspirado en la estructura de [maiafilms.pe](https://maiafilms.pe/) (productora audiovisual), pero con identidad propia de **Cayi Studio**: paleta ink/naranja, tipografía Lexend, iconos de línea dibujados a mano y animaciones reales (no plantilla genérica).
+Está inspirado en la estructura de [maiafilms.pe](https://maiafilms.pe/) (productora audiovisual), pero con identidad propia de **Cayi Studio**: estética de estudio creativo premium — negro/blanco protagonista, fotografía grande, mucho espacio negativo, acentos de color usados con moderación (teal/morado/rosa/naranja).
 
-### Pasada de rediseño (auditoría anti-genérico)
+### Rediseño premium (estudio creativo / editorial / cinematográfico)
 
-Se auditó el diseño con la skill `redesign-skill` (más `soft-skill` e `impeccable` como referencia) para identificar patrones que se ven "hechos por IA". Cambios concretos que salieron de esa auditoría:
+El sitio pasó por un rediseño visual completo pensado para sentirse como una productora/agencia premium en vez de una landing corporativa genérica:
 
-- **Las 4 secciones de tarjetas seguidas (Servicios, Portafolio, Testimonios, Clientes) usaban la misma caja con borde+sombra** — el patrón más genérico de todos. Ahora Servicios y Testimonios ya no tienen caja (un filete superior y una comilla grande los diferencian); Portafolio y Clientes sí mantienen tarjeta porque enmarcan una imagen/logo.
-- **Textura de grano de película sutil** sobre toda la página (`.grain-overlay` en `css/style.css`) — rompe la planitud total, sin necesitar ninguna imagen.
-- **Un solo acento dominante**: las etiquetas pequeñas ("kicker") pasaron de rosa a naranja oscuro; el rosa fucsia queda solo en los 2 botones donde el cliente pidió variedad, en vez de repetirse en cada sección.
-- **Accesibilidad**: el foco del teclado en el formulario se había quedado sin indicador visible (`outline:none` sin reemplazo) — ahora tiene un anillo de foco visible en todo el sitio.
-- **Rendimiento de animación**: el brillo del splash animaba `left` (fuerza reflow); ahora anima `transform` (acelerado por GPU).
-- **Menú con sección activa resaltada** al hacer scroll (antes no había ninguna indicación de en qué sección estabas).
-- **Meta tags Open Graph/Twitter** para que el link se vea bien al compartirlo en WhatsApp/redes.
-- **Página de política de privacidad** creada y enlazada (el checkbox del formulario la mencionaba pero no existía).
-- Títulos con Title Case inconsistente pasados a minúscula natural en español; nombres de testimonios variados en vez de "Nombre Apellido" repetido 3 veces.
+- **Navbar** transparente sobre el héroe, con blur + fondo oscuro al hacer scroll (`.navbar.scrolled` en `css/style.css`, toggle en `js/main.js`). CTA "Hablemos" y menú fullscreen en mobile.
+- **Héroe cinematográfico**: imagen a pantalla completa con overlay oscuro, grano, parallax muy sutil al hacer scroll, titular editorial en mayúsculas y un indicador "Scroll ↓".
+- **Servicios en franjas editoriales** (numeradas 01–04) en vez de 4 cards iguales — la imagen aparece al pasar el mouse sobre cada fila.
+- **Portafolio tipo bento/masonry** con tamaños de imagen variados (no una grilla uniforme) y filtros por categoría (Todos/Eventos/Estudio/Publicidad/Contenido) — lógica en `js/main.js`.
+- **Testimonios en carrusel editorial**: una cita grande a la vez, con navegación `←/→` y contador `01/03`, en vez de 3 cards iguales.
+- **Clientes en marquesina** horizontal continua sobre fondo negro.
+- **Contacto con inputs minimalistas** (línea inferior, sin cajas) y enlace directo a WhatsApp.
+- **Cursor personalizado** sutil en desktop (solo con mouse de precisión) que muestra "Ver" al pasar sobre un proyecto del portafolio.
+- Paleta nueva: negro `#08090B`, blanco `#F7F7F5`, gris `#9CA3AF`, gris oscuro `#17191D`, y 4 acentos (teal `#20C997`, morado `#8B5CF6`, rosa `#EC4899`, naranja `#F59E0B`) usados solo en botones, hovers y pequeños detalles — nunca como color base.
+- Tipografía: **Plus Jakarta Sans** en todo el sitio (títulos en negrita/extra-negrita, cuerpo en regular/medio).
+- **Sin picsum.photos ni servicios externos de imágenes**: las fotos de referencia son SVG locales en `images/` (mismo tratamiento de duotono de marca), listas para reemplazar por fotos reales sin depender de un tercero.
+- No se inventaron números de "clientes/proyectos" ni logos de clientes reales — esa sección de métricas queda fuera hasta que haya datos reales; los logos de clientes siguen como placeholders "Cliente 1..8".
 
-Quedaron **27 skills de diseño instaladas globalmente** en `~/.claude/skills/` (de los repos `emilkowalski/skills`, `leonxlnx/taste-skill` y `pbakaus/impeccable`) para futuras rondas de pulido — cubren animación, tipografía, layout, y auditorías de "taste" en general.
+Todo esto se construyó sobre la base que ya existía (mismo HTML/CSS/JS vanilla, mismo panel de administrador, mismo backend de Supabase) — no se reescribió el sitio desde cero ni se rompió ninguna funcionalidad.
+
+Quedan **27 skills de diseño instaladas globalmente** en `~/.claude/skills/` (de los repos `emilkowalski/skills`, `leonxlnx/taste-skill` y `pbakaus/impeccable`) para futuras rondas de pulido — cubren animación, tipografía, layout, y auditorías de "taste" en general.
 
 ### Animaciones instaladas
 
@@ -89,22 +94,24 @@ Si prefieres editar directamente en el código en vez de usar `admin.html`: todo
 ### Colores de marca (en `css/style.css`, arriba de todo — y también editables desde el panel)
 
 ```css
---bg:#FFFFFF;     /* fondo base de toda la web — blanco, para que se vea limpio y profesional */
---ink:#221812;    /* header, footer y CTAs de contraste */
---orange:#EF8B3C; /* acento principal (botones, iconos) */
---pink:#C81760;   /* acento secundario (solo en etiquetas pequeñas "kicker") */
---teal:#1C8C7C;   /* acento terciario (solo en el botón "Ver Portafolio") */
+--ink:#08090B;      /* negro — navbar, footer, secciones oscuras */
+--bg:#F7F7F5;        /* blanco cálido — fondo base */
+--surface-2:#17191D; /* gris oscuro — navbar con blur */
+--orange:#EF8B3C;    /* naranja de Cayi — acento PRINCIPAL (botones, CTA, foco) */
+--pink:#C81760;      /* rosa de Cayi — acento secundario (algunos hover) */
+--teal:#20C997;      /* acento nuevo — solo en el tinte de las fotos de referencia */
+--purple:#8B5CF6;    /* acento nuevo — solo en el hover de la flecha de Servicios */
 ```
 
-El diseño usa **blanco + ink + naranja** como base (como el header negro y los botones mostaza de referencias tipo Maia Films) y reserva el rosa/teal para detalles puntuales — evita que se vea "arcoíris" o genérico.
+La identidad es **negro + blanco + fotografía**. El naranja y el rosa son los colores originales de Cayi y se mantienen como acento dominante (tal como pediste); el teal y el morado del rediseño se usan a propósito muy poco, solo en 1-2 detalles puntuales — nunca como color de fondo de una sección completa.
 
 ### Tipografía
 
-`Lexend` en todo el sitio (titulares en negrita/extra-negrita, texto de cuerpo en regular/medio) — una sola familia tipográfica, cargada gratis desde Google Fonts. Se eligió por ser moderna, muy legible (está diseñada específicamente para maximizar la fluidez de lectura) y menos común en plantillas genéricas que Inter/Roboto/Manrope. No tiene cursiva real, así que el acento "yi" del logo se distingue solo por color, no por itálica. Si quieres probar otra tipografía, cámbiala en la línea `<link href="https://fonts.googleapis.com/css2?family=...">` de `index.html`, `admin.html` y `politica-de-privacidad.html`, y en `--font-display`/`--font-body` de `css/style.css` (y en `admin.html`, que tiene sus propias variables).
+`Plus Jakarta Sans` en todo el sitio (titulares en negrita/extra-negrita, texto de cuerpo en regular/medio) — una sola familia tipográfica, cargada gratis desde Google Fonts. Si quieres probar otra tipografía, cámbiala en la línea `<link href="https://fonts.googleapis.com/css2?family=...">` de `index.html`, `admin.html` y `politica-de-privacidad.html`, y en `--font-display`/`--font-body` de `css/style.css` (y en `admin.html`, que tiene sus propias variables).
 
 ### Fotos de referencia
 
-El héroe, "Nosotros", las 6 tarjetas de Portafolio y los avatares de Testimonios usan fotos de [picsum.photos](https://picsum.photos) (con una URL fija por `seed`, así no cambian entre recargas) para que puedas ver cómo se ve la web con fotos reales en vez de placeholders vacíos. Tienen un filtro CSS de "duotono" (`--ink` → `--orange`, ver sección "Tratamiento de marca para fotos de referencia" en `css/style.css`) para que fotos de stock random se sientan parte del mismo sistema visual en vez de imágenes sueltas — el filtro se aplica a cualquier imagen automáticamente, así que tus fotos reales también lo van a tener a menos que lo quites. Reemplaza estas URLs por tus fotos reales desde el panel de administrador (o directamente en el HTML) en cuanto las tengas — son de un banco de imágenes genérico, no fotos reales de Cayi Studio.
+El héroe, "Nosotros", los 4 servicios, las 6 tarjetas de Portafolio y los avatares de Testimonios usan **SVG generados localmente en `images/`** (sin depender de picsum.photos ni de ningún servicio externo) para que puedas ver cómo se ve la web con imágenes en vez de espacios vacíos. Tienen un filtro CSS de "duotono" (`--ink` → `--teal`, ver sección "Tratamiento de fotos de referencia" en `css/style.css`) para que se sientan parte del mismo sistema visual — el filtro se aplica a cualquier imagen automáticamente, así que tus fotos reales también lo van a tener a menos que lo quites. Reemplázalas por tus fotos reales desde el panel de administrador en cuanto las tengas.
 
 ### El formulario de contacto (funciona en cualquier hosting)
 
@@ -140,5 +147,5 @@ El panel de administrador y el formulario de contacto funcionan igual en cualqui
 - `js/content-defaults.js` — el contenido de ejemplo/por defecto, compartido entre `index.html` y `admin.html`.
 - `supabase-config.js` — tus credenciales de Supabase (edítalo, no lo borres).
 - `supabase-schema.sql` — el script que crea la tabla y el bucket en Supabase (solo se usa una vez).
-- `images/` — solo el favicon local; las fotos de referencia se cargan desde picsum.photos (ver arriba) hasta que subas las tuyas.
+- `images/` — favicon + fotos de referencia SVG locales (ver arriba) hasta que subas las tuyas.
 - `politica-de-privacidad.html` — página legal básica enlazada desde el footer y el checkbox del formulario (texto de partida, revísalo antes de publicar).

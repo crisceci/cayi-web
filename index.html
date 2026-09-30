@@ -6,8 +6,6 @@
 <title>Cayi Studio — Fotografía y Video</title>
 <meta name="description" content="Cayi Studio: fotografía y video para eventos corporativos, estudio, publicidad y contenido para redes sociales.">
 
-<!-- TODO: cuando tengas una foto real del héroe, cámbiala en og:image / twitter:image
-     (por ahora usa el favicon como imagen de respaldo para que el link no salga vacío). -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Cayi Studio — Fotografía y Video">
 <meta property="og:description" content="Fotografía y video para eventos corporativos, estudio, publicidad y contenido para redes sociales.">
@@ -20,17 +18,16 @@
 <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- Grano de película sutil sobre toda la página (ver css/style.css) -->
 <div class="grain-overlay" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"><span class="cursor-label" id="cursorLabel">Ver</span></div>
 
 <!-- ===================== SPLASH DE BIENVENIDA ===================== -->
-<!-- Se muestra siempre al cargar/recargar la página; se oculta solo con JS (ver js/main.js). -->
 <div id="splash" aria-hidden="true">
   <div class="splash-inner">
     <div class="splash-word" id="splashWord">
@@ -46,20 +43,20 @@
 
 <a class="skip-link" href="#contenido">Ir al contenido</a>
 
-<!-- ===================== HEADER ===================== -->
-<header class="site-header" id="header">
-  <div class="wrap header-inner">
-    <a href="#inicio" class="brand" aria-label="Cayi Studio — Inicio">
-      <span class="ca">Ca</span><span class="yi">yi</span> <span class="brand-sub">Studio</span>
-    </a>
+<!-- ===================== NAVBAR ===================== -->
+<header class="navbar" id="navbar">
+  <div class="wrap navbar-inner">
+    <a href="#inicio" class="nav-logo" aria-label="Cayi Studio — Inicio">Cayi<span>.</span></a>
 
-    <nav class="main-nav" id="mainNav">
+    <nav class="nav-links" id="mainNav">
       <a href="#inicio">Inicio</a>
       <a href="#servicios">Servicios</a>
       <a href="#portafolio">Portafolio</a>
       <a href="#nosotros">Nosotros</a>
-      <a href="#contacto" class="nav-cta">Contáctanos</a>
+      <a href="#contacto">Contacto</a>
     </nav>
+
+    <a href="#contacto" class="nav-cta">Hablemos</a>
 
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mainNav">
       <span></span><span></span><span></span>
@@ -71,174 +68,216 @@
 
   <!-- ===================== HERO ===================== -->
   <section class="hero" id="inicio">
-    <div class="wrap hero-inner">
-      <div class="hero-copy">
-        <a href="#portafolio" class="eyebrow-btn" id="heroEyebrow">Ver Portafolio</a>
-        <h1 id="heroTitle">Más que fotografía y video,<br> construimos la imagen de tu marca.</h1>
-        <p id="heroP1">¿Necesitas contenido visual que conecte con tu público? En <strong>Cayi Studio</strong> creamos fotografía y video con una mirada cuidada, pensados para que tu marca, tu evento o tu producto se vean como se merecen.</p>
-        <p id="heroP2">Trabajamos eventos corporativos, sesiones de estudio, campañas publicitarias y contenido para redes sociales — todo con el mismo cuidado en cada detalle, desde la primera idea hasta la entrega final.</p>
-        <div class="hero-actions" id="heroActions">
-          <a href="#contacto" class="btn btn-primary">Contáctanos</a>
-          <a href="#servicios" class="btn btn-ghost">Ver Servicios</a>
-        </div>
-      </div>
-
-      <!-- Reel destacado: un solo video, se reproduce automático (sin sonido) apenas carga la página.
-           TODO: sube tu reel real desde el panel de administrador (campo "Video del héroe" dentro de Héroe),
-           o reemplaza directamente el <img> de abajo por
-           <video autoplay muted loop playsinline src="tu-reel.mp4"></video> -->
-      <div class="hero-media" data-hero-media>
-        <img id="heroMedia" src="https://picsum.photos/seed/cayi-hero-reel/900/1125" alt="Foto de referencia — sube tu reel real desde el panel de administrador" loading="eager">
+    <div class="hero-bg" data-hero-media>
+      <img id="heroMedia" src="images/hero-placeholder.svg" alt="Foto de referencia — sube tu reel real desde el panel de administrador" loading="eager">
+    </div>
+    <div class="hero-content wrap">
+      <span class="hero-tag">Cayi Studio</span>
+      <h1 id="heroTitle">Más que fotografía.<br>Construimos la imagen<br>de tu marca.</h1>
+      <p id="heroP1">¿Necesitas contenido visual que conecte con tu público? En <strong>Cayi Studio</strong> creamos fotografía y video con una mirada cuidada, pensados para que tu marca, tu evento o tu producto se vean como se merecen.</p>
+      <p id="heroP2">Trabajamos eventos corporativos, sesiones de estudio, campañas publicitarias y contenido para redes sociales — todo con el mismo cuidado en cada detalle, desde la primera idea hasta la entrega final.</p>
+      <div class="hero-actions" id="heroActions">
+        <a href="#portafolio" class="btn btn-primary" id="heroEyebrow">Ver Portafolio</a>
+        <a href="#contacto" class="btn btn-secondary">Hablemos</a>
       </div>
     </div>
+    <div class="hero-scroll">Scroll <span>↓</span></div>
   </section>
 
   <!-- ===================== SERVICIOS ===================== -->
-  <section class="section section-tint" id="servicios">
+  <section class="section" id="servicios">
     <div class="wrap">
-      <div class="section-head" data-aos="fade-up">
+      <div class="section-head-editorial" data-aos="fade-up">
         <span class="kicker">Lo que hacemos</span>
-        <h2>Nuestros servicios</h2>
+        <h2>Servicios</h2>
       </div>
 
-      <div class="grid grid-4 services-grid">
-        <article class="card service-card" data-service="0" data-aos="fade-up" data-aos-delay="0">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="14" width="26" height="20" rx="3"/><path d="M30 20l12-6v20l-12-6"/><circle cx="17" cy="24" r="6"/></svg>
+      <div class="service-rows">
+        <article class="service-row" data-service="0" data-aos="fade-up">
+          <span class="service-num">01</span>
+          <div class="service-row-text">
+            <h3>Eventos Corporativos</h3>
+            <p>Cobertura fotográfica y de video para conferencias, lanzamientos, workshops y celebraciones de empresa. Capturamos los momentos clave para que tu evento siga contando su historia después de terminado.</p>
           </div>
-          <h3>Fotografía y Video para Eventos Corporativos</h3>
-          <p>Cobertura fotográfica y de video para conferencias, lanzamientos, workshops y celebraciones de empresa. Capturamos los momentos clave para que tu evento siga contando su historia después de terminado.</p>
-          <a href="#contacto" class="link-arrow">Ver más →</a>
+          <div class="service-row-media"><img src="images/service-eventos.svg" alt="" loading="lazy"></div>
+          <span class="service-arrow">→</span>
         </article>
-        <article class="card service-card" data-service="1" data-aos="fade-up" data-aos-delay="80">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="12" width="36" height="26" rx="3"/><path d="M17 12l4-5h6l4 5"/><circle cx="24" cy="25" r="8"/><circle cx="35" cy="18" r="1.4" fill="currentColor" stroke="none"/></svg>
+
+        <article class="service-row" data-service="1" data-aos="fade-up">
+          <span class="service-num">02</span>
+          <div class="service-row-text">
+            <h3>Fotografía de Estudio</h3>
+            <p>Sesiones en estudio con iluminación controlada para retratos corporativos, equipos de trabajo, productos o books personales — resultados consistentes y de alta calidad.</p>
           </div>
-          <h3>Fotografía de Estudio</h3>
-          <p>Sesiones en estudio con iluminación controlada para retratos corporativos, equipos de trabajo, productos o books personales — resultados consistentes y de alta calidad.</p>
-          <a href="#contacto" class="link-arrow">Ver más →</a>
+          <div class="service-row-media"><img src="images/service-estudio.svg" alt="" loading="lazy"></div>
+          <span class="service-arrow">→</span>
         </article>
-        <article class="card service-card" data-service="2" data-aos="fade-up" data-aos-delay="160">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20v8h6l12 8V12l-12 8H6z"/><path d="M30 18a8 8 0 010 12"/><path d="M36 13a15 15 0 010 22"/></svg>
+
+        <article class="service-row" data-service="2" data-aos="fade-up">
+          <span class="service-num">03</span>
+          <div class="service-row-text">
+            <h3>Fotografía Publicitaria</h3>
+            <p>Imágenes pensadas para vender: producto, campaña o marca, con dirección de arte enfocada en lo que tu audiencia necesita ver para conectar y convertir.</p>
           </div>
-          <h3>Fotografía Publicitaria</h3>
-          <p>Imágenes pensadas para vender: producto, campaña o marca, con dirección de arte enfocada en lo que tu audiencia necesita ver para conectar y convertir.</p>
-          <a href="#contacto" class="link-arrow">Ver más →</a>
+          <div class="service-row-media"><img src="images/service-publicidad.svg" alt="" loading="lazy"></div>
+          <span class="service-arrow">→</span>
         </article>
-        <article class="card service-card" data-service="3" data-aos="fade-up" data-aos-delay="240">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="6" width="28" height="36" rx="4"/><path d="M20 14h8M20 20l6 4-6 4v-8z"/><path d="M20 32h8"/></svg>
+
+        <article class="service-row" data-service="3" data-aos="fade-up">
+          <span class="service-num">04</span>
+          <div class="service-row-text">
+            <h3>Creación de Contenido</h3>
+            <p>Fotografía y video para Instagram, TikTok y el resto de tus redes — contenido pensado para el feed, las historias y los formatos que tu marca necesita en el día a día.</p>
           </div>
-          <h3>Creación de Contenido</h3>
-          <p>Fotografía y video para Instagram, TikTok y el resto de tus redes — contenido pensado para el feed, las historias y los formatos que tu marca necesita en el día a día.</p>
-          <a href="#contacto" class="link-arrow">Ver más →</a>
+          <div class="service-row-media"><img src="images/service-contenido.svg" alt="" loading="lazy"></div>
+          <span class="service-arrow">→</span>
         </article>
       </div>
     </div>
   </section>
 
   <!-- ===================== PORTAFOLIO ===================== -->
-  <section class="section" id="portafolio">
+  <section class="section section-tint" id="portafolio">
     <div class="wrap">
-      <div class="section-head" data-aos="fade-up">
+      <div class="section-head-editorial" data-aos="fade-up">
         <span class="kicker">Nuestro trabajo</span>
-        <h2>Nuestras Producciones</h2>
-        <p>Cada proyecto es distinto, pero todos comparten el mismo estándar: cuidado en la imagen y cumplimiento en la entrega. Aquí un adelanto de los formatos en los que trabajamos — <em>reemplaza estas tarjetas por tus propios proyectos y fotos</em>:</p>
+        <h2>Nuestras producciones</h2>
+        <p>Proyectos que hablan por sí solos.</p>
       </div>
 
-      <!-- TODO: son fotos de referencia (stock genérico de picsum.photos, con un tinte
-           de marca encima) solo para que veas cómo se ve la grilla con fotos reales.
-           Reemplázalas por tus propios proyectos desde el panel de administrador. -->
-      <div class="grid grid-3 portfolio-grid">
-        <article class="card portfolio-card" data-portfolio="0" data-aos="fade-up" data-aos-delay="0">
-          <div class="portfolio-media"><img src="https://picsum.photos/seed/cayi-corporativo/800/600" alt="Foto de referencia — Evento Corporativo" loading="lazy"></div>
-          <div class="card-body"><h3>Evento Corporativo</h3><p>Nombre del cliente</p></div>
+      <div class="portfolio-filters" id="portfolioFilters" data-aos="fade-up">
+        <button class="filter-btn active" data-filter="todos">Todos</button>
+        <button class="filter-btn" data-filter="eventos">Eventos</button>
+        <button class="filter-btn" data-filter="estudio">Estudio</button>
+        <button class="filter-btn" data-filter="publicidad">Publicidad</button>
+        <button class="filter-btn" data-filter="contenido">Contenido</button>
+      </div>
+
+      <div class="portfolio-masonry" id="portfolioGrid" data-aos="fade-up">
+        <article class="portfolio-item big" data-portfolio="0" data-category="eventos">
+          <div class="portfolio-media"><img src="images/portfolio-eventos.svg" alt="Foto de referencia — Evento Corporativo" loading="lazy"></div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-cat">Eventos</span>
+            <h3>Evento Corporativo</h3>
+            <span class="portfolio-link">Ver proyecto →</span>
+          </div>
         </article>
-        <article class="card portfolio-card" data-portfolio="1" data-aos="fade-up" data-aos-delay="80">
-          <div class="portfolio-media"><img src="https://picsum.photos/seed/cayi-estudio/800/600" alt="Foto de referencia — Sesión de Estudio" loading="lazy"></div>
-          <div class="card-body"><h3>Sesión de Estudio</h3><p>Nombre del cliente</p></div>
+        <article class="portfolio-item" data-portfolio="1" data-category="estudio">
+          <div class="portfolio-media"><img src="images/portfolio-estudio.svg" alt="Foto de referencia — Sesión de Estudio" loading="lazy"></div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-cat">Estudio</span>
+            <h3>Sesión de Estudio</h3>
+            <span class="portfolio-link">Ver proyecto →</span>
+          </div>
         </article>
-        <article class="card portfolio-card" data-portfolio="2" data-aos="fade-up" data-aos-delay="160">
-          <div class="portfolio-media"><img src="https://picsum.photos/seed/cayi-publicidad/800/600" alt="Foto de referencia — Campaña Publicitaria" loading="lazy"></div>
-          <div class="card-body"><h3>Campaña Publicitaria</h3><p>Nombre del cliente</p></div>
+        <article class="portfolio-item small" data-portfolio="2" data-category="publicidad">
+          <div class="portfolio-media"><img src="images/portfolio-publicidad.svg" alt="Foto de referencia — Campaña Publicitaria" loading="lazy"></div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-cat">Publicidad</span>
+            <h3>Campaña Publicitaria</h3>
+            <span class="portfolio-link">Ver proyecto →</span>
+          </div>
         </article>
-        <article class="card portfolio-card" data-portfolio="3" data-aos="fade-up" data-aos-delay="0">
-          <div class="portfolio-media"><img src="https://picsum.photos/seed/cayi-redes/800/600" alt="Foto de referencia — Contenido para Redes" loading="lazy"></div>
-          <div class="card-body"><h3>Contenido para Redes</h3><p>Nombre del cliente</p></div>
+        <article class="portfolio-item tall" data-portfolio="3" data-category="contenido">
+          <div class="portfolio-media"><img src="images/portfolio-contenido.svg" alt="Foto de referencia — Contenido para Redes" loading="lazy"></div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-cat">Contenido</span>
+            <h3>Contenido para Redes</h3>
+            <span class="portfolio-link">Ver proyecto →</span>
+          </div>
         </article>
-        <article class="card portfolio-card" data-portfolio="4" data-aos="fade-up" data-aos-delay="80">
-          <div class="portfolio-media"><img src="https://picsum.photos/seed/cayi-retrato/800/600" alt="Foto de referencia — Retrato Profesional" loading="lazy"></div>
-          <div class="card-body"><h3>Retrato Profesional</h3><p>Nombre del cliente</p></div>
+        <article class="portfolio-item small" data-portfolio="4" data-category="estudio">
+          <div class="portfolio-media"><img src="images/portfolio-retrato.svg" alt="Foto de referencia — Retrato Profesional" loading="lazy"></div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-cat">Estudio</span>
+            <h3>Retrato Profesional</h3>
+            <span class="portfolio-link">Ver proyecto →</span>
+          </div>
         </article>
-        <article class="card portfolio-card" data-portfolio="5" data-aos="fade-up" data-aos-delay="160">
-          <div class="portfolio-media"><img src="https://picsum.photos/seed/cayi-backstage/800/600" alt="Foto de referencia — Backstage de Evento" loading="lazy"></div>
-          <div class="card-body"><h3>Backstage de Evento</h3><p>Nombre del cliente</p></div>
+        <article class="portfolio-item wide" data-portfolio="5" data-category="eventos">
+          <div class="portfolio-media"><img src="images/portfolio-backstage.svg" alt="Foto de referencia — Backstage de Evento" loading="lazy"></div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-cat">Eventos</span>
+            <h3>Backstage de Evento</h3>
+            <span class="portfolio-link">Ver proyecto →</span>
+          </div>
         </article>
       </div>
     </div>
   </section>
 
   <!-- ===================== NOSOTROS ===================== -->
-  <section class="section about-section" id="nosotros">
+  <section class="about-section" id="nosotros">
     <div class="wrap about-inner">
       <div class="about-media" data-aos="fade-right">
-        <img id="aboutImg" src="https://picsum.photos/seed/cayi-equipo/1000/900" alt="Foto de referencia del equipo de Cayi Studio">
+        <img id="aboutImg" src="images/about-placeholder.svg" alt="Foto de referencia del equipo de Cayi Studio">
       </div>
       <div class="about-copy" data-aos="fade-left">
         <span class="kicker">Quiénes somos</span>
-        <h2 id="aboutTitle">Un equipo que cree que cada imagen debe contar algo</h2>
+        <h2 id="aboutTitle">No solo hacemos imágenes.<br>Creamos la forma en la que<br>tu marca es recordada.</h2>
         <p id="aboutP1">Somos <strong>Cayi Studio</strong>, un equipo de fotografía y video que trabaja de cerca con cada cliente para entender qué necesita comunicar — y traducirlo en imágenes que se sostienen en el tiempo.</p>
         <p id="aboutP2">Desde una sesión de estudio hasta la cobertura completa de un evento corporativo, cuidamos cada detalle: la luz, el encuadre, el tiempo de entrega.</p>
-        <a href="#contacto" class="btn btn-secondary">Conócenos más</a>
+        <a href="#contacto" class="btn btn-ghost">Conócenos más</a>
+        <div class="about-tag">
+          <strong>Cayi Studio</strong>
+          <span>Fotografía · Video · Producción</span>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ===================== TESTIMONIOS ===================== -->
-  <section class="section section-tint" id="testimonios">
-    <div class="wrap">
-      <div class="section-head" data-aos="fade-up">
+  <section class="section section-dark" id="testimonios">
+    <div class="wrap testimonial-wrap">
+      <div class="section-head-editorial" data-aos="fade-up">
         <span class="kicker">Confían en nosotros</span>
-        <h2>Testimonios de clientes</h2>
-        <p><em>Reemplaza estos testimonios de ejemplo por comentarios reales de tus clientes.</em></p>
+        <h2>Lo que dicen quienes ya trabajaron con nosotros</h2>
       </div>
 
-      <div class="grid grid-3 testimonials-grid">
-        <blockquote class="card testimonial-card" data-testimonial="0" data-aos="fade-up" data-aos-delay="0">
-          <p>El equipo de Cayi Studio entendió exactamente lo que necesitábamos para nuestro evento y entregó todo a tiempo.</p>
-          <footer>
-            <img class="testi-avatar" src="https://picsum.photos/seed/cayi-testi-1/80/80" alt="" loading="lazy">
-            <div><strong>Valeria Chumpitaz</strong><span>Coordinadora de Marketing, Grupo Estrella</span></div>
-          </footer>
-        </blockquote>
-        <blockquote class="card testimonial-card" data-testimonial="1" data-aos="fade-up" data-aos-delay="80">
-          <p>Muy profesionales, creativos y fáciles de coordinar. Las fotos superaron nuestras expectativas.</p>
-          <footer>
-            <img class="testi-avatar" src="https://picsum.photos/seed/cayi-testi-2/80/80" alt="" loading="lazy">
-            <div><strong>Renzo Salcedo</strong><span>Gerente de Eventos, Hotel Miraflores Bay</span></div>
-          </footer>
-        </blockquote>
-        <blockquote class="card testimonial-card" data-testimonial="2" data-aos="fade-up" data-aos-delay="160">
-          <p>Recomendamos a Cayi Studio para cualquier proyecto que necesite calidad y cumplimiento.</p>
-          <footer>
-            <img class="testi-avatar" src="https://picsum.photos/seed/cayi-testi-3/80/80" alt="" loading="lazy">
-            <div><strong>Milagros Quispe</strong><span>Fundadora, Estudio Nima</span></div>
-          </footer>
-        </blockquote>
+      <div class="testimonial-slider" data-aos="fade-up">
+        <div class="testimonial-track" id="testimonialTrack">
+          <blockquote class="testimonial-slide active" data-testimonial="0">
+            <p>El equipo de Cayi Studio entendió exactamente lo que necesitábamos para nuestro evento y entregó todo a tiempo.</p>
+            <footer>
+              <img class="testi-avatar" src="images/avatar-1.svg" alt="" loading="lazy">
+              <div><strong>Valeria Chumpitaz</strong><span>Coordinadora de Marketing, Grupo Estrella</span></div>
+            </footer>
+          </blockquote>
+          <blockquote class="testimonial-slide" data-testimonial="1">
+            <p>Muy profesionales, creativos y fáciles de coordinar. Las fotos superaron nuestras expectativas.</p>
+            <footer>
+              <img class="testi-avatar" src="images/avatar-2.svg" alt="" loading="lazy">
+              <div><strong>Renzo Salcedo</strong><span>Gerente de Eventos, Hotel Miraflores Bay</span></div>
+            </footer>
+          </blockquote>
+          <blockquote class="testimonial-slide" data-testimonial="2">
+            <p>Recomendamos a Cayi Studio para cualquier proyecto que necesite calidad y cumplimiento.</p>
+            <footer>
+              <img class="testi-avatar" src="images/avatar-3.svg" alt="" loading="lazy">
+              <div><strong>Milagros Quispe</strong><span>Fundadora, Estudio Nima</span></div>
+            </footer>
+          </blockquote>
+        </div>
+
+        <div class="testimonial-nav">
+          <button id="testiPrev" type="button" aria-label="Testimonio anterior">←</button>
+          <span id="testiCounter">01 / 03</span>
+          <button id="testiNext" type="button" aria-label="Testimonio siguiente">→</button>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ===================== CLIENTES ===================== -->
-  <section class="section" id="clientes">
+  <section class="clients-marquee" id="clientes">
     <div class="wrap">
-      <div class="section-head" data-aos="fade-up">
+      <div class="section-head-editorial" data-aos="fade-up">
         <span class="kicker">Nuestros clientes</span>
         <h2>Marcas que ya confiaron en Cayi Studio</h2>
-        <p><em>Reemplaza estos logos de ejemplo por los logos reales de tus clientes.</em></p>
       </div>
-      <div class="clients-grid" data-aos="fade-up">
+    </div>
+    <div class="marquee-track-wrap">
+      <div class="marquee-track" id="clientsMarquee">
         <div class="client-logo" data-client="0">Cliente 1</div>
         <div class="client-logo" data-client="1">Cliente 2</div>
         <div class="client-logo" data-client="2">Cliente 3</div>
@@ -247,16 +286,25 @@
         <div class="client-logo" data-client="5">Cliente 6</div>
         <div class="client-logo" data-client="6">Cliente 7</div>
         <div class="client-logo" data-client="7">Cliente 8</div>
+        <!-- Set duplicado para el loop continuo — el panel actualiza ambas copias automáticamente -->
+        <div class="client-logo" data-client="0" aria-hidden="true">Cliente 1</div>
+        <div class="client-logo" data-client="1" aria-hidden="true">Cliente 2</div>
+        <div class="client-logo" data-client="2" aria-hidden="true">Cliente 3</div>
+        <div class="client-logo" data-client="3" aria-hidden="true">Cliente 4</div>
+        <div class="client-logo" data-client="4" aria-hidden="true">Cliente 5</div>
+        <div class="client-logo" data-client="5" aria-hidden="true">Cliente 6</div>
+        <div class="client-logo" data-client="6" aria-hidden="true">Cliente 7</div>
+        <div class="client-logo" data-client="7" aria-hidden="true">Cliente 8</div>
       </div>
     </div>
   </section>
 
   <!-- ===================== CONTACTO ===================== -->
-  <section class="section section-dark" id="contacto">
+  <section class="contact-section section-dark" id="contacto">
     <div class="wrap contact-inner">
       <div class="contact-copy" data-aos="fade-right">
         <span class="kicker">Hablemos</span>
-        <h2>Contáctanos</h2>
+        <h2>¿Tienes una idea?<br>Hagámosla real.</h2>
         <p>¿Tienes un evento, una campaña o un proyecto en mente? Escríbenos y conversamos pronto:</p>
         <ul class="contact-list">
           <li>
@@ -271,6 +319,10 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 13-9 13s-9-7-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             <span id="contactAddressText">Agrega tu ciudad o dirección</span>
           </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            <a id="contactWhatsapp" href="https://wa.me/51000000000" target="_blank" rel="noopener">WhatsApp</a>
+          </li>
         </ul>
         <div class="social-links">
           <a href="#" data-social="instagram" aria-label="Instagram">Instagram</a>
@@ -280,31 +332,33 @@
       </div>
 
       <!-- Envía el formulario con FormSubmit (gratis, sin necesidad de crear cuenta ni backend).
-           TODO: cambia "hola@cayistudio.pe" en el action de abajo por tu email real.
-           La primera vez que alguien lo envíe, FormSubmit te manda un correo para confirmar
-           y activar el buzón — ver README.md para más detalles. -->
+           TODO: cambia "hola@cayistudio.pe" en el action de abajo por tu email real. -->
       <form class="contact-form" data-aos="fade-left" id="contactForm" action="https://formsubmit.co/hola@cayistudio.pe" method="POST">
         <input type="hidden" name="_subject" value="Nuevo mensaje desde la web de Cayi Studio">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="nombre" required>
+        <div class="field-line">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" required>
+        </div>
+        <div class="field-line">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="field-line">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+        </div>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="mensaje">Mensaje</label>
-        <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
-
-        <label class="checkbox-label">
+        <label class="checkbox-line">
           <input type="checkbox" name="acepto" required>
           He leído y acepto la <a href="politica-de-privacidad.html" target="_blank" rel="noopener">política de privacidad</a>.
         </label>
 
         <button type="submit" class="btn btn-primary">Enviar</button>
-        <p class="form-note">Los mensajes llegan directo a tu email (gratis, vía FormSubmit) — funciona en cualquier hosting. Ver README.md para configurarlo.</p>
+        <p class="form-note">Los mensajes llegan directo a tu email (gratis, vía FormSubmit) — funciona en cualquier hosting.</p>
       </form>
     </div>
   </section>
@@ -315,7 +369,7 @@
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <div class="footer-brand">
-      <span class="brand"><span class="ca">Ca</span><span class="yi">yi</span> <span class="brand-sub">Studio</span></span>
+      <span class="nav-logo">Cayi<span>.</span> Studio</span>
       <p>Fotografía y video para eventos, estudio, publicidad y contenido de marca.</p>
     </div>
 

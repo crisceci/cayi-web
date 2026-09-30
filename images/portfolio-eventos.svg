@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" role="img" aria-label="Evento Corporativo">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#08090B"/>
+      <stop offset="100%" stop-color="#17191D"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1100" fill="url(#g)"/>
+  <g opacity="0.55" stroke="#20C997" stroke-width="1.5" fill="none">
+    <path d="M28 60 V28 H60"/>
+    <path d="M840 60 V28 H872"/>
+    <path d="M28 1040 V1072 H60"/>
+    <path d="M840 1072 H872 V1040"/>
+  </g>
+  <circle cx="450" cy="530" r="34" fill="none" stroke="#20C997" stroke-width="2"/>
+  <path d="M440 514 L468 530 L440 546 Z" fill="#20C997"/>
+  <text x="450" y="602" font-family="Arial, sans-serif" font-size="14" letter-spacing="3" fill="#20C997" text-anchor="middle">REFERENCIA</text>
+  <text x="450" y="628" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#F7F7F5" text-anchor="middle">Evento Corporativo</text>
+</svg>

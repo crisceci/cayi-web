@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" role="img" aria-label="Sesion de Estudio">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#08090B"/>
+      <stop offset="100%" stop-color="#17191D"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="700" fill="url(#g)"/>
+  <g opacity="0.55" stroke="#20C997" stroke-width="1.5" fill="none">
+    <path d="M28 60 V28 H60"/>
+    <path d="M840 60 V28 H872"/>
+    <path d="M28 640 V672 H60"/>
+    <path d="M840 672 H872 V640"/>
+  </g>
+  <circle cx="450" cy="330" r="34" fill="none" stroke="#20C997" stroke-width="2"/>
+  <path d="M440 314 L468 330 L440 346 Z" fill="#20C997"/>
+  <text x="450" y="402" font-family="Arial, sans-serif" font-size="14" letter-spacing="3" fill="#20C997" text-anchor="middle">REFERENCIA</text>
+  <text x="450" y="428" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#F7F7F5" text-anchor="middle">Sesion de Estudio</text>
+</svg>

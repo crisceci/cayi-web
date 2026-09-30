@@ -1,3 +1,5 @@
+var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 // ---------- Menú móvil ----------
 var navToggle = document.getElementById('navToggle');
 var mainNav = document.getElementById('mainNav');
@@ -5,16 +7,29 @@ var mainNav = document.getElementById('mainNav');
 if (navToggle && mainNav) {
   navToggle.addEventListener('click', function () {
     var isOpen = mainNav.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
     navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
 
   mainNav.querySelectorAll('a').forEach(function (link) {
     link.addEventListener('click', function () {
       mainNav.classList.remove('open');
+      navToggle.classList.remove('open');
       navToggle.setAttribute('aria-expanded', 'false');
     });
   });
 }
+
+// ---------- Navbar: fondo con blur al hacer scroll ----------
+(function navbarScroll() {
+  var navbar = document.getElementById('navbar');
+  if (!navbar) return;
+  function update() {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+})();
 
 // ---------- Año automático en el footer ----------
 var yearEl = document.getElementById('year');
@@ -22,8 +37,8 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // ---------- Resalta en el menú la sección que se está viendo ----------
 (function scrollspy() {
-  var sections = document.querySelectorAll('main section[id]');
-  var navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
+  var sections = document.querySelectorAll('main section[id], .clients-marquee[id]');
+  var navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
   if (!sections.length || !navLinks.length || !('IntersectionObserver' in window)) return;
 
   function setActive(id) {
@@ -43,33 +58,38 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // ---------- Animaciones al hacer scroll (librería AOS) ----------
 if (window.AOS) {
-  AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
+  AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60, disable: prefersReducedMotion });
 }
+
+// ---------- Parallax muy sutil en la imagen del héroe ----------
+(function heroParallax() {
+  if (prefersReducedMotion) return;
+  var media = document.querySelector('.hero-bg img, .hero-bg video');
+  var hero = document.querySelector('.hero');
+  if (!media || !hero) return;
+  window.addEventListener('scroll', function () {
+    var rect = hero.getBoundingClientRect();
+    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+    var progress = -rect.top / (hero.offsetHeight || 1);
+    media.style.transform = 'translateY(' + Math.round(progress * 60) + 'px) scale(1.06)';
+  }, { passive: true });
+})();
 
 // ---------- Entrada del héroe (GSAP) — se dispara después del splash ----------
 function playHeroEntrance() {
   if (!window.gsap) return;
-  gsap.set(['#heroEyebrow', '#heroTitle', '#heroP1', '#heroP2', '#heroActions'], { opacity: 0, y: 22 });
-  gsap.set('.hero-media', { opacity: 0, scale: 0.96 });
-  gsap.to('#heroEyebrow', { opacity: 1, y: 0, duration: 0.6, delay: 0.05, ease: 'power2.out' });
-  gsap.to('#heroTitle',   { opacity: 1, y: 0, duration: 0.7, delay: 0.16, ease: 'power2.out' });
-  gsap.to('#heroP1',      { opacity: 1, y: 0, duration: 0.7, delay: 0.28, ease: 'power2.out' });
-  gsap.to('#heroP2',      { opacity: 1, y: 0, duration: 0.7, delay: 0.38, ease: 'power2.out' });
-  gsap.to('#heroActions', { opacity: 1, y: 0, duration: 0.7, delay: 0.48, ease: 'power2.out' });
-  gsap.to('.hero-media',  { opacity: 1, scale: 1, duration: 0.8, delay: 0.14, ease: 'power2.out' });
+  var targets = ['.hero-tag', '#heroTitle', '#heroP1', '#heroP2', '#heroActions'];
+  gsap.set(targets, { opacity: 0, y: 26 });
+  gsap.set('.hero-bg', { opacity: 0, scale: 1.08 });
+  gsap.to('.hero-bg', { opacity: 1, scale: 1, duration: 1.1, ease: 'power2.out' });
+  gsap.to('.hero-tag', { opacity: 1, y: 0, duration: 0.6, delay: 0.25, ease: 'power2.out' });
+  gsap.to('#heroTitle', { opacity: 1, y: 0, duration: 0.75, delay: 0.36, ease: 'power2.out' });
+  gsap.to('#heroP1', { opacity: 1, y: 0, duration: 0.7, delay: 0.5, ease: 'power2.out' });
+  gsap.to('#heroP2', { opacity: 1, y: 0, duration: 0.7, delay: 0.58, ease: 'power2.out' });
+  gsap.to('#heroActions', { opacity: 1, y: 0, duration: 0.7, delay: 0.68, ease: 'power2.out' });
 }
 
 // ---------- Sonido de bienvenida (sintetizado, sin archivos de audio) ----------
-// Un pequeño acorde ascendente (do-mi-sol) generado con Web Audio API.
-//
-// IMPORTANTE: los navegadores (Chrome, Safari, Firefox) bloquean TODO audio
-// automático hasta que la persona interactúa con la página al menos una vez
-// (clic, toque o tecla) — es una política universal, no algo propio de este
-// sitio ni algo que se pueda saltar con código. Por eso: si el navegador ya
-// permite audio en este origen, el acorde suena de inmediato junto al splash;
-// si no, queda "armado" y suena automáticamente en el instante exacto de la
-// primera interacción real de la persona con la página (sin que tenga que
-// hacer nada especial — cualquier clic, toque o tecla lo dispara).
 function playChime() {
   try {
     var Ctx = window.AudioContext || window.webkitAudioContext;
@@ -78,7 +98,7 @@ function playChime() {
 
     function scheduleNotes() {
       var now = ctx.currentTime;
-      var notes = [523.25, 659.25, 783.99]; // C5, E5, G5
+      var notes = [523.25, 659.25, 783.99];
       notes.forEach(function (freq, i) {
         var osc = ctx.createOscillator();
         var gain = ctx.createGain();
@@ -119,18 +139,15 @@ function playChime() {
   var el = document.getElementById('splash');
   if (!el) { playHeroEntrance(); return; }
 
-  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   function finish() {
     document.body.classList.remove('splash-active');
     el.classList.add('splash-hidden');
     playHeroEntrance();
   }
 
-  // Red de seguridad: si algo falla (GSAP no cargó, etc.) el splash nunca se queda pegado.
   var safety = setTimeout(finish, 4000);
 
-  if (reduceMotion || !window.gsap) {
+  if (prefersReducedMotion || !window.gsap) {
     clearTimeout(safety);
     finish();
     return;
@@ -145,16 +162,88 @@ function playChime() {
     x: function (i, target) { return target.getAttribute('data-dir') === 'left' ? -70 : 70; }
   });
   gsap.set('#splashSub', { opacity: 0, y: 10 });
-  gsap.set('#splashShine', { xPercent: 0 }); // reposa en el left:-35% fijo del CSS
+  gsap.set('#splashShine', { xPercent: 0 });
 
-  var tl = gsap.timeline({
-    onComplete: function () { clearTimeout(safety); finish(); }
-  });
+  var tl = gsap.timeline({ onComplete: function () { clearTimeout(safety); finish(); } });
   tl.to(letters, { opacity: 1, x: 0, duration: 0.55, ease: 'back.out(1.7)', stagger: 0.08 })
     .to('#splashSub', { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.15')
-    .to('#splashShine', { xPercent: 800, duration: 0.7, ease: 'power2.inOut' }, '-=0.1') // transform, no "left" (GPU-friendly)
+    .to('#splashShine', { xPercent: 800, duration: 0.7, ease: 'power2.inOut' }, '-=0.1')
     .to({}, { duration: 0.3 })
     .to(el, { opacity: 0, duration: 0.5, ease: 'power1.inOut' });
+})();
+
+// ---------- Cursor personalizado (solo escritorio con mouse fino) ----------
+(function customCursor() {
+  var dot = document.getElementById('cursorDot');
+  var label = document.getElementById('cursorLabel');
+  if (!dot || !window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+
+  window.addEventListener('mousemove', function (e) {
+    dot.style.left = e.clientX + 'px';
+    dot.style.top = e.clientY + 'px';
+  }, { passive: true });
+
+  document.querySelectorAll('.portfolio-item').forEach(function (item) {
+    item.addEventListener('mouseenter', function () {
+      dot.classList.add('is-view');
+      if (label) label.textContent = 'Ver';
+    });
+    item.addEventListener('mouseleave', function () { dot.classList.remove('is-view'); });
+  });
+})();
+
+// ---------- Filtros del portafolio ----------
+(function portfolioFilters() {
+  var bar = document.getElementById('portfolioFilters');
+  var grid = document.getElementById('portfolioGrid');
+  if (!bar || !grid) return;
+
+  var buttons = bar.querySelectorAll('.filter-btn');
+  var items = grid.querySelectorAll('.portfolio-item');
+
+  bar.addEventListener('click', function (e) {
+    var btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    var filter = btn.dataset.filter;
+
+    buttons.forEach(function (b) { b.classList.toggle('active', b === btn); });
+    items.forEach(function (item) {
+      var show = filter === 'todos' || item.dataset.category === filter;
+      item.classList.toggle('hidden', !show);
+    });
+  });
+})();
+
+// ---------- Carrusel de testimonios ----------
+(function testimonialCarousel() {
+  var track = document.getElementById('testimonialTrack');
+  var prevBtn = document.getElementById('testiPrev');
+  var nextBtn = document.getElementById('testiNext');
+  var counter = document.getElementById('testiCounter');
+  if (!track || !prevBtn || !nextBtn) return;
+
+  var slides = track.querySelectorAll('.testimonial-slide');
+  var current = 0;
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function render() {
+    slides.forEach(function (slide, i) { slide.classList.toggle('active', i === current); });
+    if (counter) counter.textContent = pad(current + 1) + ' / ' + pad(slides.length);
+    prevBtn.disabled = slides.length <= 1;
+    nextBtn.disabled = slides.length <= 1;
+  }
+
+  prevBtn.addEventListener('click', function () {
+    current = (current - 1 + slides.length) % slides.length;
+    render();
+  });
+  nextBtn.addEventListener('click', function () {
+    current = (current + 1) % slides.length;
+    render();
+  });
+
+  render();
 })();
 
 // ---------- Contenido dinámico (Panel de administrador vía Supabase) ----------
@@ -207,11 +296,7 @@ function playChime() {
       if (title) title.innerHTML = content.hero.title;
       if (p1) p1.innerHTML = content.hero.p1;
       if (p2) p2.innerHTML = content.hero.p2;
-    }
-
-    // Video del héroe (reel destacado)
-    if (content.hero && content.hero.media) {
-      setMedia(document.querySelector('[data-hero-media]'), content.hero.media, 'Reel de Cayi Studio', false);
+      if (content.hero.media) setMedia(document.querySelector('[data-hero-media]'), content.hero.media, 'Reel de Cayi Studio', false);
     }
 
     // Portafolio
@@ -220,20 +305,23 @@ function playChime() {
       if (!card) return;
       var img = card.querySelector('img');
       var h3 = card.querySelector('h3');
-      var p = card.querySelector('p');
+      var cat = card.querySelector('.portfolio-cat');
       if (img && item.image) { img.src = item.image; img.alt = item.title || ''; }
       if (h3) h3.textContent = item.title;
-      if (p) p.textContent = item.client;
+      if (cat && item.category) cat.textContent = item.category.charAt(0).toUpperCase() + item.category.slice(1);
+      if (item.category) card.dataset.category = item.category;
     });
 
     // Servicios
     (content.services || []).forEach(function (item, i) {
-      var card = document.querySelector('[data-service="' + i + '"]');
-      if (!card) return;
-      var h3 = card.querySelector('h3');
-      var p = card.querySelector('p');
+      var row = document.querySelector('[data-service="' + i + '"]');
+      if (!row) return;
+      var h3 = row.querySelector('h3');
+      var p = row.querySelector('p');
+      var img = row.querySelector('img');
       if (h3) h3.textContent = item.title;
       if (p) p.textContent = item.desc;
+      if (img && item.image) img.src = item.image;
     });
 
     // Nosotros
@@ -242,7 +330,7 @@ function playChime() {
       var aboutP1 = document.getElementById('aboutP1');
       var aboutP2 = document.getElementById('aboutP2');
       var aboutImg = document.getElementById('aboutImg');
-      if (aboutTitle) aboutTitle.textContent = content.about.title;
+      if (aboutTitle) aboutTitle.innerHTML = content.about.title;
       if (aboutP1) aboutP1.innerHTML = content.about.p1;
       if (aboutP2) aboutP2.innerHTML = content.about.p2;
       if (aboutImg && content.about.image) aboutImg.src = content.about.image;
@@ -260,21 +348,21 @@ function playChime() {
       if (span) span.textContent = item.role;
     });
 
-    // Clientes
+    // Clientes (cada logo aparece 2 veces en la marquesina — se actualizan ambas copias)
     (content.clients || []).forEach(function (item, i) {
-      var box = document.querySelector('[data-client="' + i + '"]');
-      if (!box) return;
-      if (item.logo) {
-        box.innerHTML = '';
-        var img = document.createElement('img');
-        img.src = item.logo;
-        img.alt = item.name || '';
-        img.style.maxWidth = '80%';
-        img.style.maxHeight = '60%';
-        box.appendChild(img);
-      } else {
-        box.textContent = item.name;
-      }
+      document.querySelectorAll('[data-client="' + i + '"]').forEach(function (box) {
+        if (item.logo) {
+          box.innerHTML = '';
+          var img = document.createElement('img');
+          img.src = item.logo;
+          img.alt = item.name || '';
+          img.style.maxHeight = '32px';
+          img.style.filter = 'grayscale(1) brightness(1.8)';
+          box.appendChild(img);
+        } else {
+          box.textContent = item.name;
+        }
+      });
     });
 
     // Contacto
@@ -282,9 +370,12 @@ function playChime() {
       var phoneLink = document.getElementById('contactPhoneLink');
       var emailLink = document.getElementById('contactEmailLink');
       var addressText = document.getElementById('contactAddressText');
+      var whatsapp = document.getElementById('contactWhatsapp');
       if (phoneLink && content.contact.phone) {
+        var digits = content.contact.phone.replace(/[^\d+]/g, '');
         phoneLink.textContent = content.contact.phone;
-        phoneLink.href = 'tel:' + content.contact.phone.replace(/[^\d+]/g, '');
+        phoneLink.href = 'tel:' + digits;
+        if (whatsapp) whatsapp.href = 'https://wa.me/' + digits.replace('+', '');
       }
       if (emailLink && content.contact.email) {
         emailLink.textContent = content.contact.email;
