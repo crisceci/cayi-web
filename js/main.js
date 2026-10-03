@@ -368,7 +368,6 @@ function playChime() {
     if (content.contact) {
       var phoneLink = document.getElementById('contactPhoneLink');
       var emailLink = document.getElementById('contactEmailLink');
-      var addressText = document.getElementById('contactAddressText');
       var whatsapp = document.getElementById('contactWhatsapp');
       if (phoneLink && content.contact.phone) {
         var digits = content.contact.phone.replace(/[^\d+]/g, '');
@@ -380,9 +379,7 @@ function playChime() {
         emailLink.textContent = content.contact.email;
         emailLink.href = 'mailto:' + content.contact.email;
       }
-      if (addressText && content.contact.address) addressText.textContent = content.contact.address;
-
-      ['instagram', 'facebook', 'tiktok'].forEach(function (key) {
+      ['instagram', 'linkedin', 'tiktok'].forEach(function (key) {
         var url = content.contact[key];
         if (!url) return;
         document.querySelectorAll('[data-social="' + key + '"]').forEach(function (a) {

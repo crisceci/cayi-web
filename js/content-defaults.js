@@ -56,9 +56,8 @@ window.CAYI_DEFAULT_CONTENT = {
   contact: {
     phone: "+51 000 000 000",
     email: "hola@cayistudio.pe",
-    address: "Agrega tu ciudad o dirección",
     instagram: "",
-    facebook: "",
+    linkedin: "",
     tiktok: ""
   }
 };
