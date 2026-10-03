@@ -226,12 +226,20 @@ body.splash-active{ overflow:hidden; }
   align-self:flex-start; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
   color:var(--ink); background:var(--orange); padding:4px 10px; border-radius:999px; margin-bottom:12px;
 }
-.portfolio-overlay h3{ color:#F7F7F5; font-size:19px; margin-bottom:6px; }
+.portfolio-overlay h3{ color:#F7F7F5; font-size:19px; margin-bottom:4px; }
+.portfolio-client{ color:#C7C7C5; font-size:13px; margin-bottom:6px; }
 .portfolio-link{
   color:#F7F7F5; font-size:13px; font-weight:700; opacity:0; transform:translateY(6px);
   transition:opacity .25s ease, transform .25s ease;
 }
 .portfolio-item:hover .portfolio-link{ opacity:1; transform:translateY(0); }
+
+/* ---------- campos personalizados ("extra") agregados desde el panel ---------- */
+.extra-fields{ margin:6px 0 10px; }
+.extra-row{ display:flex; gap:6px; font-size:12.5px; line-height:1.5; opacity:.85; }
+.extra-row dt{ font-weight:700; }
+.extra-row dt::after{ content:":"; }
+.extra-row dd{ margin:0; }
 
 /* ---------- tratamiento de fotos de referencia (duotono de marca) ---------- */
 .hero-bg img, .about-media img, .portfolio-media img, .service-row-media img{

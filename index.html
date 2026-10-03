@@ -98,47 +98,10 @@
         <h2>Servicios</h2>
       </div>
 
-      <div class="service-rows">
-        <article class="service-row" data-service="0" data-aos="fade-up">
-          <span class="service-num">01</span>
-          <div class="service-row-text">
-            <h3>Eventos Corporativos</h3>
-            <p>Cobertura fotográfica y de video para conferencias, lanzamientos, workshops y celebraciones de empresa. Capturamos los momentos clave para que tu evento siga contando su historia después de terminado.</p>
-          </div>
-          <div class="service-row-media"><img src="images/service-eventos.svg" alt="" loading="lazy"></div>
-          <span class="service-arrow">→</span>
-        </article>
-
-        <article class="service-row" data-service="1" data-aos="fade-up">
-          <span class="service-num">02</span>
-          <div class="service-row-text">
-            <h3>Fotografía de Estudio</h3>
-            <p>Sesiones en estudio con iluminación controlada para retratos corporativos, equipos de trabajo, productos o books personales — resultados consistentes y de alta calidad.</p>
-          </div>
-          <div class="service-row-media"><img src="images/service-estudio.svg" alt="" loading="lazy"></div>
-          <span class="service-arrow">→</span>
-        </article>
-
-        <article class="service-row" data-service="2" data-aos="fade-up">
-          <span class="service-num">03</span>
-          <div class="service-row-text">
-            <h3>Fotografía Publicitaria</h3>
-            <p>Imágenes pensadas para vender: producto, campaña o marca, con dirección de arte enfocada en lo que tu audiencia necesita ver para conectar y convertir.</p>
-          </div>
-          <div class="service-row-media"><img src="images/service-publicidad.svg" alt="" loading="lazy"></div>
-          <span class="service-arrow">→</span>
-        </article>
-
-        <article class="service-row" data-service="3" data-aos="fade-up">
-          <span class="service-num">04</span>
-          <div class="service-row-text">
-            <h3>Creación de Contenido</h3>
-            <p>Fotografía y video para Instagram, TikTok y el resto de tus redes — contenido pensado para el feed, las historias y los formatos que tu marca necesita en el día a día.</p>
-          </div>
-          <div class="service-row-media"><img src="images/service-contenido.svg" alt="" loading="lazy"></div>
-          <span class="service-arrow">→</span>
-        </article>
-      </div>
+      <!-- Las filas de servicios se arman en js/main.js a partir del contenido
+           (por defecto o guardado en Supabase) — agrega/quita servicios desde
+           el panel de administrador, no hace falta tocar este archivo. -->
+      <div class="service-rows" id="serviceRows"></div>
     </div>
   </section>
 
@@ -159,56 +122,9 @@
         <button class="filter-btn" data-filter="contenido">Contenido</button>
       </div>
 
-      <div class="portfolio-masonry" id="portfolioGrid" data-aos="fade-up">
-        <article class="portfolio-item big" data-portfolio="0" data-category="eventos">
-          <div class="portfolio-media"><img src="images/portfolio-eventos.svg" alt="Foto de referencia — Evento Corporativo" loading="lazy"></div>
-          <div class="portfolio-overlay">
-            <span class="portfolio-cat">Eventos</span>
-            <h3>Evento Corporativo</h3>
-            <span class="portfolio-link">Ver proyecto →</span>
-          </div>
-        </article>
-        <article class="portfolio-item" data-portfolio="1" data-category="estudio">
-          <div class="portfolio-media"><img src="images/portfolio-estudio.svg" alt="Foto de referencia — Sesión de Estudio" loading="lazy"></div>
-          <div class="portfolio-overlay">
-            <span class="portfolio-cat">Estudio</span>
-            <h3>Sesión de Estudio</h3>
-            <span class="portfolio-link">Ver proyecto →</span>
-          </div>
-        </article>
-        <article class="portfolio-item small" data-portfolio="2" data-category="publicidad">
-          <div class="portfolio-media"><img src="images/portfolio-publicidad.svg" alt="Foto de referencia — Campaña Publicitaria" loading="lazy"></div>
-          <div class="portfolio-overlay">
-            <span class="portfolio-cat">Publicidad</span>
-            <h3>Campaña Publicitaria</h3>
-            <span class="portfolio-link">Ver proyecto →</span>
-          </div>
-        </article>
-        <article class="portfolio-item tall" data-portfolio="3" data-category="contenido">
-          <div class="portfolio-media"><img src="images/portfolio-contenido.svg" alt="Foto de referencia — Contenido para Redes" loading="lazy"></div>
-          <div class="portfolio-overlay">
-            <span class="portfolio-cat">Contenido</span>
-            <h3>Contenido para Redes</h3>
-            <span class="portfolio-link">Ver proyecto →</span>
-          </div>
-        </article>
-        <article class="portfolio-item small" data-portfolio="4" data-category="estudio">
-          <div class="portfolio-media"><img src="images/portfolio-retrato.svg" alt="Foto de referencia — Retrato Profesional" loading="lazy"></div>
-          <div class="portfolio-overlay">
-            <span class="portfolio-cat">Estudio</span>
-            <h3>Retrato Profesional</h3>
-            <span class="portfolio-link">Ver proyecto →</span>
-          </div>
-        </article>
-        <article class="portfolio-item wide" data-portfolio="5" data-category="eventos">
-          <div class="portfolio-media"><img src="images/portfolio-backstage.svg" alt="Foto de referencia — Backstage de Evento" loading="lazy"></div>
-          <div class="portfolio-overlay">
-            <span class="portfolio-cat">Eventos</span>
-            <h3>Backstage de Evento</h3>
-            <span class="portfolio-link">Ver proyecto →</span>
-          </div>
-        </article>
-      </div>
+      <!-- Las tarjetas del portafolio se arman en js/main.js a partir del
+           contenido — agrega/quita proyectos desde el panel de administrador. -->
+      <div class="portfolio-masonry" id="portfolioGrid" data-aos="fade-up"></div>
     </div>
   </section>
 
@@ -240,30 +156,10 @@
         <h2>Lo que dicen quienes ya trabajaron con nosotros</h2>
       </div>
 
+      <!-- Las citas se arman en js/main.js a partir del contenido — agrega/quita
+           testimonios desde el panel de administrador. -->
       <div class="testimonial-slider" data-aos="fade-up">
-        <div class="testimonial-track" id="testimonialTrack">
-          <blockquote class="testimonial-slide active" data-testimonial="0">
-            <p>El equipo de Cayi Studio entendió exactamente lo que necesitábamos para nuestro evento y entregó todo a tiempo.</p>
-            <footer>
-              <img class="testi-avatar" src="images/avatar-1.svg" alt="" loading="lazy">
-              <div><strong>Valeria Chumpitaz</strong><span>Coordinadora de Marketing, Grupo Estrella</span></div>
-            </footer>
-          </blockquote>
-          <blockquote class="testimonial-slide" data-testimonial="1">
-            <p>Muy profesionales, creativos y fáciles de coordinar. Las fotos superaron nuestras expectativas.</p>
-            <footer>
-              <img class="testi-avatar" src="images/avatar-2.svg" alt="" loading="lazy">
-              <div><strong>Renzo Salcedo</strong><span>Gerente de Eventos, Hotel Miraflores Bay</span></div>
-            </footer>
-          </blockquote>
-          <blockquote class="testimonial-slide" data-testimonial="2">
-            <p>Recomendamos a Cayi Studio para cualquier proyecto que necesite calidad y cumplimiento.</p>
-            <footer>
-              <img class="testi-avatar" src="images/avatar-3.svg" alt="" loading="lazy">
-              <div><strong>Milagros Quispe</strong><span>Fundadora, Estudio Nima</span></div>
-            </footer>
-          </blockquote>
-        </div>
+        <div class="testimonial-track" id="testimonialTrack"></div>
 
         <div class="testimonial-nav">
           <button id="testiPrev" type="button" aria-label="Testimonio anterior">←</button>
@@ -282,26 +178,10 @@
         <h2>Marcas que ya confiaron en Cayi Studio</h2>
       </div>
     </div>
+    <!-- El listado de logos se arma en js/main.js (duplicado automáticamente
+         para el loop continuo) — agrega/quita clientes desde el panel. -->
     <div class="marquee-track-wrap">
-      <div class="marquee-track" id="clientsMarquee">
-        <div class="client-logo" data-client="0">Cliente 1</div>
-        <div class="client-logo" data-client="1">Cliente 2</div>
-        <div class="client-logo" data-client="2">Cliente 3</div>
-        <div class="client-logo" data-client="3">Cliente 4</div>
-        <div class="client-logo" data-client="4">Cliente 5</div>
-        <div class="client-logo" data-client="5">Cliente 6</div>
-        <div class="client-logo" data-client="6">Cliente 7</div>
-        <div class="client-logo" data-client="7">Cliente 8</div>
-        <!-- Set duplicado para el loop continuo — el panel actualiza ambas copias automáticamente -->
-        <div class="client-logo" data-client="0" aria-hidden="true">Cliente 1</div>
-        <div class="client-logo" data-client="1" aria-hidden="true">Cliente 2</div>
-        <div class="client-logo" data-client="2" aria-hidden="true">Cliente 3</div>
-        <div class="client-logo" data-client="3" aria-hidden="true">Cliente 4</div>
-        <div class="client-logo" data-client="4" aria-hidden="true">Cliente 5</div>
-        <div class="client-logo" data-client="5" aria-hidden="true">Cliente 6</div>
-        <div class="client-logo" data-client="6" aria-hidden="true">Cliente 7</div>
-        <div class="client-logo" data-client="7" aria-hidden="true">Cliente 8</div>
-      </div>
+      <div class="marquee-track" id="clientsMarquee"></div>
     </div>
   </section>
 
@@ -326,11 +206,12 @@
             <a id="contactWhatsapp" href="https://wa.me/51000000000" target="_blank" rel="noopener">WhatsApp</a>
           </li>
         </ul>
-        <div class="social-links">
-          <a href="#" data-social="instagram" aria-label="Instagram">Instagram</a>
-          <a href="#" data-social="linkedin" aria-label="LinkedIn">LinkedIn</a>
-          <a href="#" data-social="tiktok" aria-label="TikTok">TikTok</a>
-        </div>
+        <!-- Datos de contacto adicionales (ej. dirección, horario) — se agregan
+             desde el panel de administrador, sección "Datos de contacto adicionales". -->
+        <ul class="contact-list" id="contactExtraList"></ul>
+        <!-- Se arma en js/main.js a partir de la lista "Redes sociales" del panel
+             (puedes agregar cualquier red, no solo estas tres). -->
+        <div class="social-links" id="socialLinks"></div>
       </div>
 
       <!-- Envía el formulario con FormSubmit (gratis, sin necesidad de crear cuenta ni backend).
@@ -387,9 +268,7 @@
 
     <div class="footer-col">
       <h4>Redes Sociales</h4>
-      <a href="#" data-social="instagram">Instagram</a>
-      <a href="#" data-social="linkedin">LinkedIn</a>
-      <a href="#" data-social="tiktok">TikTok</a>
+      <div id="socialLinksFooter"></div>
     </div>
   </div>
   <div class="wrap footer-bottom">

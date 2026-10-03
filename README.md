@@ -51,6 +51,17 @@ Detalles a tener en cuenta:
 
 Todo el contenido editable de la web (textos, colores, el video del héroe, y las imágenes de portafolio, servicios, nosotros, testimonios, clientes y contacto) se edita desde `admin.html` — un panel con contraseña, igual al [Panel Cayi Studio](../CAYI%20STUDIO) que ya usas, así que la mecánica te va a resultar familiar. Los cambios se guardan en Supabase (gratis) y se reflejan **al instante** en la web pública, sin necesidad de volver a publicar nada.
 
+### Control total: agregar y quitar, no solo editar
+
+El panel no está limitado a una cantidad fija de elementos:
+
+- **Portafolio, Servicios, Testimonios, Clientes y Redes sociales** tienen un botón **"+ Agregar"** al final de la lista y un botón **"Eliminar"** en cada elemento — puedes tener 3 proyectos o 30, no hay un número fijo.
+- Dentro de cada proyecto/servicio/testimonio/cliente puedes además **"+ Agregar campo personalizado"** (por ejemplo "Año", "Ubicación", "Duración") — se guarda y aparece automáticamente en la web, debajo del contenido normal de esa tarjeta, sin que nadie tenga que tocar código.
+- **"Datos de contacto adicionales"** funciona igual — ahí puedes volver a agregar algo como "Dirección" si en algún momento lo necesitas, con la etiqueta que quieras.
+- El portafolio se arma en una grilla tipo *bento* (tamaños variados) de forma automática según cuántos proyectos haya, para que no se vea como una cuadrícula uniforme aunque agregues o quites elementos.
+
+**Qué sigue necesitando un cambio de código** (pídemelo a mí cuando lo necesites): crear una sección completamente nueva en la página (por ejemplo "Precios" o "Preguntas frecuentes") con su propio diseño — eso si requiere diseñar y maquetar algo nuevo a mano para que no se vea genérico, no es algo que un botón "+ Agregar sección" pueda hacer bien de forma automática.
+
 ### 1. Configurar Supabase (una sola vez)
 
 Puedes **reutilizar el mismo proyecto de Supabase** que ya tienes para Cayi Studio (recomendado, todo en un solo lugar) o crear uno nuevo:

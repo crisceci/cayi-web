@@ -21,6 +21,7 @@
     --pink:#EC4899; --teal:#20C997;
     --bg:#F7F7F5; --surface:#FFFFFF; --surface-2:#ECECE9;
     --border:#E4E4E1;
+    --danger:#C0392B; --danger-tint:#FBE4E1;
     --shadow:0 1px 2px rgba(8,9,11,.05), 0 8px 24px -12px rgba(8,9,11,.16);
   }
   *{box-sizing:border-box;}
@@ -50,6 +51,7 @@
   #viewSiteLink{color:#FAFAFA; font-size:13px; text-decoration:underline;}
 
   .config-note{background:var(--surface-2); border:1px solid var(--border); border-radius:14px; padding:16px 18px; font-size:13.5px; color:var(--ink-soft); margin-bottom:24px;}
+  .help-note{background:var(--surface-2); border:1px solid var(--border); border-radius:14px; padding:16px 18px; font-size:13px; color:var(--ink-soft); margin-bottom:24px; line-height:1.6;}
 
   details.section{background:var(--surface); border:1px solid var(--border); border-radius:16px; margin-bottom:16px; box-shadow:var(--shadow); overflow:hidden;}
   details.section summary{cursor:pointer; padding:18px 20px; font-family:var(--font-body); font-weight:700; font-size:16px; list-style:none; display:flex; align-items:center; justify-content:space-between;}
@@ -60,7 +62,8 @@
 
   .item-block{border-top:1px solid var(--border); padding:16px 0;}
   .item-block:first-child{border-top:none;}
-  .item-title{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); margin-bottom:10px;}
+  .item-head{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px;}
+  .item-title{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint);}
 
   .field{margin-bottom:12px;}
   .field label{display:block; font-weight:700; font-size:13px; margin-bottom:5px;}
@@ -78,6 +81,33 @@
   .upload-btn:hover{border-color:var(--teal);}
   .media-preview{width:56px; height:56px; border-radius:8px; object-fit:cover; border:1px solid var(--border); background:var(--bg); flex-shrink:0;}
   .upload-status{font-size:12px; color:var(--ink-faint); width:100%;}
+
+  /* ---------- agregar / quitar (control total desde el panel) ---------- */
+  .btn-remove-item{
+    background:var(--danger-tint); color:var(--danger); border:none; border-radius:999px;
+    padding:6px 14px; font-size:12px; font-weight:700; cursor:pointer; white-space:nowrap;
+  }
+  .btn-remove-item:hover{background:var(--danger); color:#fff;}
+  .btn-add-item{
+    width:100%; margin-top:6px; background:var(--surface-2); border:1.5px dashed var(--border); color:var(--ink-soft);
+    border-radius:12px; padding:12px; font-size:13.5px; font-weight:700; cursor:pointer;
+  }
+  .btn-add-item:hover{border-color:var(--teal); color:var(--ink);}
+
+  .extra-block{background:var(--surface-2); border-radius:10px; padding:10px 12px; margin-top:8px;}
+  .extra-field-row{display:flex; gap:8px; align-items:flex-end; margin-bottom:8px;}
+  .extra-field-row:last-child{margin-bottom:0;}
+  .extra-field-row .field{flex:1; margin-bottom:0;}
+  .extra-field-row .field label{font-size:11px; color:var(--ink-faint);}
+  .btn-remove-extra{
+    background:none; border:none; color:var(--danger); font-size:18px; font-weight:700; cursor:pointer;
+    line-height:1; padding:9px 6px;
+  }
+  .btn-add-extra{
+    background:none; border:1px dashed var(--border); color:var(--ink-soft); border-radius:8px;
+    padding:7px 12px; font-size:12.5px; font-weight:700; cursor:pointer; margin-top:4px;
+  }
+  .btn-add-extra:hover{border-color:var(--teal); color:var(--ink);}
 </style>
 </head>
 <body>
@@ -110,22 +140,30 @@
     ⚠️ Falta configurar Supabase en <code>supabase-config.js</code>. Este panel no puede guardar cambios todavía — sigue los pasos del README.md.
   </div>
 
+  <div class="help-note">
+    <strong>Control total:</strong> en Portafolio, Servicios, Testimonios, Clientes y Redes Sociales puedes agregar o quitar elementos con los botones "+ Agregar" / "Eliminar". Dentro de cada elemento puedes además agregar tus propios campos personalizados (por ejemplo "Año", "Ubicación", "Duración") con "+ Agregar campo personalizado" — aparecen automáticamente en la web, debajo del contenido normal de esa tarjeta.
+  </div>
+
   <div id="sections"></div>
 </div>
 
 <script>
 // ==================================================================
-// Definición del formulario — un solo lugar describe qué campos hay
+// Qué campos "conocidos" tiene cada tipo de elemento/sección.
+// Además de estos, cada elemento de una lista puede tener campos
+// personalizados ("extra") que se agregan/quitan libremente.
 // ==================================================================
-var SECTIONS = [
-  { key: 'hero', label: 'Héroe (Inicio)', type: 'object', fields: [
+var OBJECT_SECTIONS = [
+  { key: 'hero', label: 'Héroe (Inicio)', fields: [
       { name: 'eyebrow', label: 'Texto del botón pequeño', type: 'text' },
       { name: 'title', label: 'Título principal (puedes usar &lt;br&gt; para salto de línea y &lt;strong&gt;texto&lt;/strong&gt;)', type: 'textarea' },
-      { name: 'p1', label: 'Párrafo 1 (puedes usar &lt;strong&gt;texto&lt;/strong&gt;)', type: 'textarea' },
-      { name: 'p2', label: 'Párrafo 2', type: 'textarea' },
+      { name: 'p1', label: 'Bajada corta (debajo del título)', type: 'text' },
       { name: 'media', label: 'Video del héroe (reel destacado, se reproduce en automático) o imagen', type: 'media' }
-  ]},
-  { key: 'portfolio', label: 'Portafolio', type: 'array', itemLabel: function(i){ return 'Proyecto ' + (i+1); }, fields: [
+  ]}
+];
+
+var ARRAY_SECTIONS = [
+  { key: 'portfolio', label: 'Portafolio', singular: 'proyecto', fields: [
       { name: 'title', label: 'Título', type: 'text' },
       { name: 'category', label: 'Categoría (para los filtros)', type: 'select', options: [
           { value: 'eventos', label: 'Eventos' },
@@ -133,105 +171,187 @@ var SECTIONS = [
           { value: 'publicidad', label: 'Publicidad' },
           { value: 'contenido', label: 'Contenido' }
       ] },
-      { name: 'client', label: 'Cliente (opcional, déjalo vacío si aún no tienes el dato real)', type: 'text' },
+      { name: 'client', label: 'Cliente (opcional)', type: 'text' },
       { name: 'image', label: 'Imagen', type: 'media' }
   ]},
-  { key: 'services', label: 'Servicios', type: 'array', itemLabel: function(i){ return 'Servicio ' + (i+1); }, fields: [
+  { key: 'services', label: 'Servicios', singular: 'servicio', fields: [
       { name: 'title', label: 'Título', type: 'text' },
       { name: 'desc', label: 'Descripción', type: 'textarea' },
       { name: 'image', label: 'Imagen (aparece al pasar el mouse sobre la fila)', type: 'media' }
-  ]},
-  { key: 'about', label: 'Nosotros', type: 'object', fields: [
-      { name: 'title', label: 'Título', type: 'text' },
-      { name: 'p1', label: 'Párrafo 1 (puedes usar &lt;strong&gt;texto&lt;/strong&gt;)', type: 'textarea' },
-      { name: 'p2', label: 'Párrafo 2', type: 'textarea' },
-      { name: 'image', label: 'Foto del equipo', type: 'media' }
-  ]},
-  { key: 'testimonials', label: 'Testimonios', type: 'array', itemLabel: function(i){ return 'Testimonio ' + (i+1); }, fields: [
+  ]}
+];
+
+var ABOUT_SECTION = { key: 'about', label: 'Nosotros', fields: [
+    { name: 'title', label: 'Título (puedes usar &lt;br&gt;)', type: 'textarea' },
+    { name: 'p1', label: 'Párrafo 1 (puedes usar &lt;strong&gt;texto&lt;/strong&gt;)', type: 'textarea' },
+    { name: 'p2', label: 'Párrafo 2', type: 'textarea' },
+    { name: 'image', label: 'Foto del equipo', type: 'media' }
+]};
+
+var ARRAY_SECTIONS_2 = [
+  { key: 'testimonials', label: 'Testimonios', singular: 'testimonio', fields: [
       { name: 'quote', label: 'Cita (sin comillas — el diseño ya pone una comilla grande decorativa)', type: 'textarea' },
       { name: 'name', label: 'Nombre', type: 'text' },
-      { name: 'role', label: 'Cargo / Empresa', type: 'text' }
+      { name: 'role', label: 'Cargo / Empresa', type: 'text' },
+      { name: 'avatar', label: 'Foto', type: 'media' }
   ]},
-  { key: 'clients', label: 'Clientes', type: 'array', itemLabel: function(i){ return 'Cliente ' + (i+1); }, fields: [
+  { key: 'clients', label: 'Clientes', singular: 'cliente', fields: [
       { name: 'name', label: 'Nombre (se muestra si no subes logo)', type: 'text' },
       { name: 'logo', label: 'Logo (opcional)', type: 'media' }
   ]},
-  { key: 'contact', label: 'Contacto', type: 'object', fields: [
-      { name: 'phone', label: 'Teléfono', type: 'text' },
-      { name: 'email', label: 'Email', type: 'text' },
-      { name: 'instagram', label: 'URL de Instagram', type: 'text' },
-      { name: 'linkedin', label: 'URL de LinkedIn', type: 'text' },
-      { name: 'tiktok', label: 'URL de TikTok', type: 'text' }
-  ]},
-  { key: 'colors', label: 'Colores de marca', type: 'object', fields: [
-      { name: 'ink', label: 'Ink (navbar, footer, fondos oscuros)', type: 'color' },
-      { name: 'orange', label: 'Naranja (acento principal — botones, foco)', type: 'color' },
-      { name: 'pink', label: 'Rosa (acento secundario — algunos hover)', type: 'color' },
-      { name: 'teal', label: 'Teal (detalle puntual — tinte de las fotos)', type: 'color' }
+  { key: 'social', label: 'Redes sociales', singular: 'red social', fields: [
+      { name: 'platform', label: 'Nombre de la red (ej: Instagram, LinkedIn, YouTube...)', type: 'text' },
+      { name: 'url', label: 'URL completa', type: 'text' }
   ]}
 ];
+
+var CONTACT_SECTION = { key: 'contact', label: 'Contacto (teléfono / email)', fields: [
+    { name: 'phone', label: 'Teléfono (también se usa para el link de WhatsApp)', type: 'text' },
+    { name: 'email', label: 'Email', type: 'text' }
+]};
+
+var CONTACT_EXTRA_SECTION = { key: 'contactExtra', label: 'Datos de contacto adicionales', singular: 'dato', fields: [
+    { name: 'label', label: 'Etiqueta (ej: Dirección, Horario de atención)', type: 'text' },
+    { name: 'value', label: 'Valor', type: 'text' }
+]};
+
+var COLORS_SECTION = { key: 'colors', label: 'Colores de marca', fields: [
+    { name: 'ink', label: 'Ink (navbar, footer, fondos oscuros)', type: 'color' },
+    { name: 'orange', label: 'Naranja (acento principal — botones, foco)', type: 'color' },
+    { name: 'pink', label: 'Rosa (acento secundario — algunos hover)', type: 'color' },
+    { name: 'teal', label: 'Teal (detalle puntual — tinte de las fotos)', type: 'color' }
+]};
 
 // ⚠️ Cambia esta contraseña y sube el cambio a GitHub para que se actualice.
 var PASSCODE = "CayiWeb2026";
 
 // ==================================================================
-// Construcción del formulario
+// Estado en memoria — la fuente de verdad mientras editas.
+// Se carga una vez de Supabase (o de los valores por defecto) y se
+// guarda completo cuando le das a "Guardar cambios".
 // ==================================================================
-function fieldId(sectionKey, index, fieldName) {
-  return index === null ? sectionKey + '.' + fieldName : sectionKey + '.' + index + '.' + fieldName;
+var state = null;
+var uid = 0; // para dar un id único a cada elemento mientras se edita (no se guarda)
+
+function blankItem(sectionKey) {
+  if (sectionKey === 'portfolio') return { title: '', category: 'eventos', client: '', image: '', extra: [] };
+  if (sectionKey === 'services') return { title: '', desc: '', image: '', extra: [] };
+  if (sectionKey === 'testimonials') return { quote: '', name: '', role: '', avatar: '', extra: [] };
+  if (sectionKey === 'clients') return { name: '', logo: '', extra: [] };
+  if (sectionKey === 'social') return { platform: '', url: '' };
+  if (sectionKey === 'contactExtra') return { label: '', value: '' };
+  return {};
 }
 
-function renderField(sectionKey, index, field) {
-  var id = fieldId(sectionKey, index, field.name);
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+
+// ==================================================================
+// Construcción de un campo individual (texto/textarea/select/color/media)
+// ==================================================================
+function renderField(path, field, value) {
+  var id = 'f' + (uid++);
   var html = '<div class="field">';
   html += '<label for="' + id + '">' + field.label + '</label>';
   if (field.type === 'textarea') {
-    html += '<textarea id="' + id + '" data-field="' + id + '"></textarea>';
+    html += '<textarea id="' + id + '" data-path="' + path + '">' + esc(value) + '</textarea>';
   } else if (field.type === 'color') {
-    html += '<input type="color" id="' + id + '" data-field="' + id + '">';
+    html += '<input type="color" id="' + id + '" data-path="' + path + '" value="' + esc(value || '#000000') + '">';
   } else if (field.type === 'select') {
-    html += '<select id="' + id + '" data-field="' + id + '">';
+    html += '<select id="' + id + '" data-path="' + path + '">';
     field.options.forEach(function (opt) {
-      html += '<option value="' + opt.value + '">' + opt.label + '</option>';
+      html += '<option value="' + opt.value + '"' + (opt.value === value ? ' selected' : '') + '>' + opt.label + '</option>';
     });
     html += '</select>';
   } else if (field.type === 'media') {
     html += '<div class="media-row">';
-    html += '<img class="media-preview" id="' + id + '__preview" alt="">';
-    html += '<input type="text" id="' + id + '" data-field="' + id + '" placeholder="URL de imagen/video, o sube un archivo">';
-    html += '<button type="button" class="upload-btn" data-upload-target="' + id + '">Subir archivo</button>';
-    html += '<input type="file" accept="image/*,video/*" style="display:none" id="' + id + '__file">';
-    html += '<span class="upload-status" id="' + id + '__status"></span>';
+    html += '<img class="media-preview" alt="" ' + (value ? 'src="' + esc(value) + '"' : '') + '>';
+    html += '<input type="text" data-path="' + path + '" value="' + esc(value) + '" placeholder="URL de imagen/video, o sube un archivo">';
+    html += '<button type="button" class="upload-btn" data-upload-path="' + path + '">Subir archivo</button>';
+    html += '<input type="file" accept="image/*,video/*" style="display:none" class="upload-file-input">';
+    html += '<span class="upload-status"></span>';
     html += '</div>';
   } else {
-    html += '<input type="text" id="' + id + '" data-field="' + id + '">';
+    html += '<input type="text" id="' + id + '" data-path="' + path + '" value="' + esc(value) + '">';
   }
   html += '</div>';
   return html;
 }
 
-function renderSection(section) {
-  var body = '';
-  if (section.type === 'object') {
-    body += section.fields.map(function (f) { return renderField(section.key, null, f); }).join('');
-  } else {
-    var count = (window.CAYI_DEFAULT_CONTENT[section.key] || []).length;
-    for (var i = 0; i < count; i++) {
-      body += '<div class="item-block"><div class="item-title">' + section.itemLabel(i) + '</div>';
-      body += section.fields.map(function (f) { return renderField(section.key, i, f); }).join('');
-      body += '</div>';
-    }
-  }
-  return (
-    '<details class="section"><summary>' + section.label + '</summary>' +
-    '<div class="section-body">' + body + '</div></details>'
-  );
+// ==================================================================
+// Campos personalizados ("extra") de un elemento
+// ==================================================================
+function renderExtraFields(itemPath, extra) {
+  extra = extra || [];
+  var html = '<div class="extra-block">';
+  extra.forEach(function (row, i) {
+    var base = itemPath + '.extra.' + i;
+    html += '<div class="extra-field-row">';
+    html += '<div class="field"><label>Etiqueta</label><input type="text" data-path="' + base + '.label" value="' + esc(row.label) + '" placeholder="Ej: Año"></div>';
+    html += '<div class="field"><label>Valor</label><input type="text" data-path="' + base + '.value" value="' + esc(row.value) + '" placeholder="Ej: 2026"></div>';
+    html += '<button type="button" class="btn-remove-extra" data-action="remove-extra" data-path="' + itemPath + '" data-index="' + i + '" title="Quitar este campo">×</button>';
+    html += '</div>';
+  });
+  html += '<button type="button" class="btn-add-extra" data-action="add-extra" data-path="' + itemPath + '">+ Agregar campo personalizado</button>';
+  html += '</div>';
+  return html;
 }
 
-document.getElementById('sections').innerHTML = SECTIONS.map(renderSection).join('');
+// ==================================================================
+// Una sección de tipo objeto (no es lista — Héroe, Nosotros, Contacto, Colores)
+// ==================================================================
+function renderObjectSection(def) {
+  var obj = state[def.key] || {};
+  var body = def.fields.map(function (f) {
+    return renderField(def.key + '.' + f.name, f, obj[f.name]);
+  }).join('');
+  return '<details class="section"><summary>' + def.label + '</summary><div class="section-body">' + body + '</div></details>';
+}
 
 // ==================================================================
-// Leer / escribir valores del formulario <-> objeto de contenido
+// Una sección de tipo lista (Portafolio, Servicios, Testimonios,
+// Clientes, Redes sociales, Datos de contacto adicionales) — con
+// botones para agregar o quitar elementos.
+// ==================================================================
+function renderArraySection(def) {
+  var items = state[def.key] || [];
+  var body = items.map(function (item, i) {
+    var itemPath = def.key + '.' + i;
+    var title = item.title || item.name || item.platform || item.label || (def.singular.charAt(0).toUpperCase() + def.singular.slice(1) + ' ' + (i + 1));
+    var html = '<div class="item-block">';
+    html += '<div class="item-head"><span class="item-title">' + esc(title) + '</span>';
+    html += '<button type="button" class="btn-remove-item" data-action="remove-item" data-section="' + def.key + '" data-index="' + i + '">Eliminar</button></div>';
+    html += def.fields.map(function (f) { return renderField(itemPath + '.' + f.name, f, item[f.name]); }).join('');
+    if ('extra' in item || def.key === 'portfolio' || def.key === 'services' || def.key === 'testimonials' || def.key === 'clients') {
+      html += renderExtraFields(itemPath, item.extra);
+    }
+    html += '</div>';
+    return html;
+  }).join('');
+  body += '<button type="button" class="btn-add-item" data-action="add-item" data-section="' + def.key + '">+ Agregar ' + def.singular + '</button>';
+  return '<details class="section"><summary>' + def.label + ' (' + items.length + ')</summary><div class="section-body">' + body + '</div></details>';
+}
+
+// ==================================================================
+// Construye todo el panel a partir de `state`
+// ==================================================================
+function renderApp() {
+  var html = '';
+  OBJECT_SECTIONS.forEach(function (def) { html += renderObjectSection(def); });
+  ARRAY_SECTIONS.forEach(function (def) { html += renderArraySection(def); });
+  html += renderObjectSection(ABOUT_SECTION);
+  ARRAY_SECTIONS_2.forEach(function (def) { html += renderArraySection(def); });
+  html += renderObjectSection(CONTACT_SECTION);
+  html += renderArraySection(CONTACT_EXTRA_SECTION);
+  html += renderObjectSection(COLORS_SECTION);
+  document.getElementById('sections').innerHTML = html;
+}
+
+// ==================================================================
+// Leer / escribir valores por ruta ("portfolio.2.extra.0.label")
 // ==================================================================
 function pathGet(obj, path) {
   return path.split('.').reduce(function (o, k) { return (o == null) ? undefined : o[k]; }, obj);
@@ -247,26 +367,6 @@ function pathSet(obj, path, value) {
   cur[parts[parts.length - 1]] = value;
 }
 
-function populateForm(content) {
-  document.querySelectorAll('[data-field]').forEach(function (el) {
-    var value = pathGet(content, el.dataset.field);
-    if (value == null) return;
-    el.value = value;
-    if (el.type === 'text' && el.id.indexOf('__') === -1) {
-      var preview = document.getElementById(el.id + '__preview');
-      if (preview) { if (value) preview.src = value; else preview.removeAttribute('src'); }
-    }
-  });
-}
-
-function collectForm() {
-  var content = {};
-  document.querySelectorAll('[data-field]').forEach(function (el) {
-    pathSet(content, el.dataset.field, el.value);
-  });
-  return content;
-}
-
 // ==================================================================
 // Supabase: cargar, guardar, subir archivos
 // ==================================================================
@@ -277,10 +377,11 @@ var client = configured ? window.supabase.createClient(url, key) : null;
 if (!configured) document.getElementById('configNote').hidden = false;
 
 function loadContent() {
-  if (!client) { populateForm(window.CAYI_DEFAULT_CONTENT); return; }
+  if (!client) { state = window.CAYI_clone(window.CAYI_DEFAULT_CONTENT); renderApp(); return; }
   client.from('cayi_web_content').select('data').eq('id', 1).single().then(function (res) {
     var saved = (res.data && res.data.data) || {};
-    populateForm(window.CAYI_mergeContent(saved));
+    state = window.CAYI_mergeContent(saved);
+    renderApp();
   });
 }
 
@@ -291,8 +392,7 @@ saveBtn.addEventListener('click', function () {
   if (!client) { saveStatus.textContent = 'Configura Supabase primero (ver README.md)'; return; }
   saveBtn.disabled = true;
   saveStatus.textContent = 'Guardando…';
-  var content = window.CAYI_mergeContent(collectForm());
-  client.from('cayi_web_content').update({ data: content, updated_at: new Date().toISOString() }).eq('id', 1)
+  client.from('cayi_web_content').update({ data: state, updated_at: new Date().toISOString() }).eq('id', 1)
     .then(function (res) {
       saveBtn.disabled = false;
       if (res.error) { saveStatus.textContent = 'Error al guardar'; console.error(res.error); return; }
@@ -301,32 +401,91 @@ saveBtn.addEventListener('click', function () {
     });
 });
 
-document.getElementById('sections').addEventListener('click', function (e) {
-  var btn = e.target.closest('.upload-btn');
-  if (!btn) return;
-  var targetId = btn.dataset.uploadTarget;
-  document.getElementById(targetId + '__file').click();
+// ==================================================================
+// Eventos: escribir en el estado al tipear, agregar/quitar elementos
+// y campos personalizados, subir archivos
+// ==================================================================
+var sectionsEl = document.getElementById('sections');
+
+sectionsEl.addEventListener('input', function (e) {
+  var t = e.target;
+  if (!t.dataset.path) return;
+  pathSet(state, t.dataset.path, t.value);
 });
 
-document.getElementById('sections').addEventListener('change', function (e) {
-  if (!e.target.matches('input[type=file]')) return;
+sectionsEl.addEventListener('change', function (e) {
+  var t = e.target;
+  if (t.matches('select[data-path]')) {
+    pathSet(state, t.dataset.path, t.value);
+  }
+});
+
+sectionsEl.addEventListener('click', function (e) {
+  var addItemBtn = e.target.closest('[data-action="add-item"]');
+  if (addItemBtn) {
+    var section = addItemBtn.dataset.section;
+    if (!Array.isArray(state[section])) state[section] = [];
+    state[section].push(blankItem(section));
+    renderApp();
+    return;
+  }
+
+  var removeItemBtn = e.target.closest('[data-action="remove-item"]');
+  if (removeItemBtn) {
+    var sec = removeItemBtn.dataset.section;
+    var idx = parseInt(removeItemBtn.dataset.index, 10);
+    if (confirm('¿Eliminar este elemento? Se borra al guardar.')) {
+      state[sec].splice(idx, 1);
+      renderApp();
+    }
+    return;
+  }
+
+  var addExtraBtn = e.target.closest('[data-action="add-extra"]');
+  if (addExtraBtn) {
+    var item = pathGet(state, addExtraBtn.dataset.path);
+    if (!item.extra) item.extra = [];
+    item.extra.push({ label: '', value: '' });
+    renderApp();
+    return;
+  }
+
+  var removeExtraBtn = e.target.closest('[data-action="remove-extra"]');
+  if (removeExtraBtn) {
+    var it = pathGet(state, removeExtraBtn.dataset.path);
+    it.extra.splice(parseInt(removeExtraBtn.dataset.index, 10), 1);
+    renderApp();
+    return;
+  }
+
+  var uploadBtn = e.target.closest('.upload-btn');
+  if (uploadBtn) {
+    uploadBtn.parentElement.querySelector('.upload-file-input').click();
+    return;
+  }
+});
+
+sectionsEl.addEventListener('change', function (e) {
+  if (!e.target.matches('.upload-file-input')) return;
   if (!client) { alert('Configura Supabase primero (ver README.md) para poder subir archivos.'); return; }
   var fileInput = e.target;
-  var baseId = fileInput.id.replace('__file', '');
-  var urlInput = document.getElementById(baseId);
-  var statusEl = document.getElementById(baseId + '__status');
-  var previewEl = document.getElementById(baseId + '__preview');
+  var row = fileInput.closest('.media-row');
+  var path = row.querySelector('.upload-btn').dataset.uploadPath;
+  var urlInput = row.querySelector('input[type=text]');
+  var statusEl = row.querySelector('.upload-status');
+  var previewEl = row.querySelector('.media-preview');
   var file = fileInput.files[0];
   if (!file) return;
 
   statusEl.textContent = 'Subiendo…';
   var ext = file.name.split('.').pop();
-  var path = baseId.replace(/\./g, '-') + '-' + Date.now() + '.' + ext;
+  var storagePath = path.replace(/\./g, '-') + '-' + Date.now() + '.' + ext;
 
-  client.storage.from('cayi-web-assets').upload(path, file, { upsert: true, cacheControl: '3600' })
+  client.storage.from('cayi-web-assets').upload(storagePath, file, { upsert: true, cacheControl: '3600' })
     .then(function (res) {
       if (res.error) { statusEl.textContent = 'Error al subir'; console.error(res.error); return; }
-      var pub = client.storage.from('cayi-web-assets').getPublicUrl(path);
+      var pub = client.storage.from('cayi-web-assets').getPublicUrl(storagePath);
+      pathSet(state, path, pub.data.publicUrl);
       urlInput.value = pub.data.publicUrl;
       if (previewEl) previewEl.src = pub.data.publicUrl;
       statusEl.textContent = 'Subido ✓';
@@ -341,7 +500,6 @@ document.getElementById('lock-form').addEventListener('submit', function (e) {
   e.preventDefault();
   var val = document.getElementById('lock-pass').value;
   if (val === PASSCODE) {
-    document.getElementById('lock').classList.add('hidden');
     document.getElementById('lock').style.display = 'none';
     document.getElementById('app').hidden = false;
     loadContent();
