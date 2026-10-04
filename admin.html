@@ -308,7 +308,7 @@ function renderObjectSection(def) {
   var body = def.fields.map(function (f) {
     return renderField(def.key + '.' + f.name, f, obj[f.name]);
   }).join('');
-  return '<details class="section"><summary>' + def.label + '</summary><div class="section-body">' + body + '</div></details>';
+  return '<details class="section" data-key="' + def.key + '"><summary>' + def.label + '</summary><div class="section-body">' + body + '</div></details>';
 }
 
 // ==================================================================
@@ -332,13 +332,24 @@ function renderArraySection(def) {
     return html;
   }).join('');
   body += '<button type="button" class="btn-add-item" data-action="add-item" data-section="' + def.key + '">+ Agregar ' + def.singular + '</button>';
-  return '<details class="section"><summary>' + def.label + ' (' + items.length + ')</summary><div class="section-body">' + body + '</div></details>';
+  return '<details class="section" data-key="' + def.key + '"><summary>' + def.label + ' (' + items.length + ')</summary><div class="section-body">' + body + '</div></details>';
 }
 
 // ==================================================================
 // Construye todo el panel a partir de `state`
 // ==================================================================
 function renderApp() {
+  var sectionsEl = document.getElementById('sections');
+
+  // Recuerda qué secciones (acordeones) estaban abiertas y en qué punto de
+  // scroll estabas, para que agregar/quitar un elemento no cierre todo de
+  // golpe ni te mande de vuelta arriba del todo.
+  var openKeys = Array.prototype.map.call(
+    sectionsEl.querySelectorAll('details.section[open]'),
+    function (d) { return d.dataset.key; }
+  );
+  var scrollY = window.scrollY;
+
   var html = '';
   OBJECT_SECTIONS.forEach(function (def) { html += renderObjectSection(def); });
   ARRAY_SECTIONS.forEach(function (def) { html += renderArraySection(def); });
@@ -347,7 +358,13 @@ function renderApp() {
   html += renderObjectSection(CONTACT_SECTION);
   html += renderArraySection(CONTACT_EXTRA_SECTION);
   html += renderObjectSection(COLORS_SECTION);
-  document.getElementById('sections').innerHTML = html;
+  sectionsEl.innerHTML = html;
+
+  openKeys.forEach(function (key) {
+    var el = sectionsEl.querySelector('details.section[data-key="' + key + '"]');
+    if (el) el.open = true;
+  });
+  window.scrollTo(0, scrollY);
 }
 
 // ==================================================================
